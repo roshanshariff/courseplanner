@@ -9,10 +9,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("coursedata")
 public interface CourseDataService extends RemoteService {
 	
-	public String getHello ();
-	
-	public Course getCourse (String id);
-
-	public CourseDetails getCourseDetails (String id);
+	public CourseDetails getCourseDetails (Long id);
 	
 }

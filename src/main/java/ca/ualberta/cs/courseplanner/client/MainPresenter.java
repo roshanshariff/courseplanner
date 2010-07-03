@@ -44,7 +44,7 @@ public class MainPresenter implements Presenter, ValueChangeHandler<String> {
 
 		if (tokens.length >= 2 && tokens[0].equals("course")) {
 			
-			String id = tokens[1];
+			Long id = Long.parseLong(tokens[1]);
 			
 			courseDataService.getCourseDetails(id,
 					new AsyncCallback<CourseDetails>() {

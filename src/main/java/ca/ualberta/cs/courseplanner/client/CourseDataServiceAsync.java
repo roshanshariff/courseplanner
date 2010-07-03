@@ -8,10 +8,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface CourseDataServiceAsync {
 
-	void getHello (AsyncCallback<String> callback);
-
-	void getCourseDetails (String id, AsyncCallback<CourseDetails> callback);
-
-	void getCourse (String id, AsyncCallback<Course> callback);
+	void getCourseDetails (Long id, AsyncCallback<CourseDetails> callback);
 
 }
