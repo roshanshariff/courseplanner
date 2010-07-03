@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping type="one-way">
+		<class-a>ca.ualberta.cs.courseplanner.domain.Course</class-a>
+		<class-b>ca.ualberta.cs.courseplanner.dto.CourseDetails</class-b>
+		<field>
+			<a>subject.id</a>
+			<b>subjectId</b>
+		</field>
+		<field>
+			<a>subject.name</a>
+			<b>subjectName</b>
+		</field>
+		<field>
+			<a>org1.id</a>
+			<b>org1Id</b>
+		</field>
+		<field>
+			<a>org1.name</a>
+			<b>org1Name</b>
+		</field>
+		<field>
+			<a>org2.id</a>
+			<b>org2Id</b>
+		</field>
+		<field>
+			<a>org2.name</a>
+			<b>org2Name</b>
+		</field>
+	</mapping>
+
+</mappings>
