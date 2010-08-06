@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:courseplanner='urn:import:ca.ualberta.cs.courseplanner.client'>
+
+  <g:DockLayoutPanel unit='EM'>
+    <g:north size='5'>
+      <g:HTML>
+      	<h1>University of Alberta Course Planner</h1>
+      </g:HTML>
+    </g:north>
+
+	<g:west size="10">
+		<g:HTML>
+			All courses
+		</g:HTML>
+	</g:west>
+
+    <g:center>
+		<g:HTML>
+			Course Details Here
+		</g:HTML>
+    </g:center>
+    
+  </g:DockLayoutPanel>
+
+</ui:UiBinder>

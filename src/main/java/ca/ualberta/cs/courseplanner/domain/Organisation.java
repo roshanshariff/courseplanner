@@ -2,6 +2,10 @@ package ca.ualberta.cs.courseplanner.domain;
 
 import javax.persistence.*;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
+
 @Entity
 @Table(name="organisations")
 public class Organisation implements java.io.Serializable {
@@ -22,6 +26,7 @@ public class Organisation implements java.io.Serializable {
 	}
 	
 	@Column(length=100)
+	@Field(index=Index.TOKENIZED, store=Store.NO)
 	public String getName () {
 		return name;
 	}

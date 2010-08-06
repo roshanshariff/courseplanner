@@ -6,6 +6,5 @@
 	<source path="client" />
 	<source path="domain" />
 	<source path="dto" />
-	<entry-point
-		class="ca.ualberta.cs.courseplanner.client.CoursePlanner" />
+	<entry-point class="ca.ualberta.cs.courseplanner.client.CoursePlanner" />
 </module>

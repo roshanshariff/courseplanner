@@ -1,15 +1,11 @@
 package ca.ualberta.cs.courseplanner.domain;
 
 import javax.persistence.*;
-
-import org.hibernate.search.annotations.DocumentId;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
-import org.hibernate.search.annotations.IndexedEmbedded;
-import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.*;
 
 @Entity
 @Table(name="courses")
+@Indexed
 public class Course implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1759624274109532278L;

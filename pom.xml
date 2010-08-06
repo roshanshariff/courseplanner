@@ -114,6 +114,12 @@
 			<version>3.1.0.GA</version>
 			<type>jar</type>
 			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>ejb3-persistence</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>javassist</groupId>
@@ -178,6 +184,27 @@
 			<type>jar</type>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 	<organization>
 		<name>University of Alberta Computing Science</name>
@@ -213,7 +240,7 @@
 	</build>
 	<properties>
 		<servlet.version>2.5</servlet.version>
-		<gwt.version>2.1.0.M2</gwt.version>
+		<gwt.version>2.0.4</gwt.version>
 		<hibernate.version>3.5.3-Final</hibernate.version>
 		<hibernate.search.version>3.2.0.Final</hibernate.search.version>
 		<spring.version>3.0.3.RELEASE</spring.version>
