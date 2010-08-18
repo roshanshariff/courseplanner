@@ -8,20 +8,22 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 
 public class MainPresenter implements Presenter, ValueChangeHandler<String> {
 	
-	private CourseDataServiceAsync courseDataService;	
+	private DataServiceAsync courseDataService;	
 	private HandlerManager eventBus;
 	private HasWidgets container;
 	
-	public MainPresenter (CourseDataServiceAsync courseDataService, HandlerManager eventBus) {
+	public MainPresenter (DataServiceAsync courseDataService, HandlerManager eventBus) {
 		this.courseDataService = courseDataService;
 		this.eventBus = eventBus;
 		bind();
@@ -51,6 +53,7 @@ public class MainPresenter implements Presenter, ValueChangeHandler<String> {
 						
 						@Override
 						public void onSuccess (CourseDetails result) {
+							if (result == null) return;
 							container.clear();
 							container.add(new HTML(
 									"<h1>"
@@ -65,7 +68,7 @@ public class MainPresenter implements Presenter, ValueChangeHandler<String> {
 						
 						@Override
 						public void onFailure (Throwable caught) {
-							RootPanel.getBodyElement().setInnerText(caught.getMessage());
+							Window.alert(caught.getMessage());
 						}
 					});
 		}

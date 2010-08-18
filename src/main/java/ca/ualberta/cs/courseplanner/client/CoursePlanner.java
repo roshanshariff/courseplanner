@@ -20,12 +20,12 @@ public class CoursePlanner extends UIObject implements EntryPoint {
 		
 		DockLayoutPanel main = binder.createAndBindUi(this);
 		RootLayoutPanel root = RootLayoutPanel.get();
-		root.add(main);
+		//root.add(main);
 		
-		CourseDataServiceAsync courseDataService = (CourseDataServiceAsync) GWT.create(CourseDataService.class);
+		DataServiceAsync courseDataService = (DataServiceAsync) GWT.create(DataService.class);
 		HandlerManager eventBus = new HandlerManager(null);
 		MainPresenter controller = new MainPresenter(courseDataService, eventBus);
-//		controller.present(RootPanel.get());
+		controller.present(root);
 	}
 
 }

@@ -4,18 +4,12 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import org.springframework.security.core.GrantedAuthority;
-
 @Entity
 @Table(name="users")
 public class User {
 	
-	public static enum Role implements GrantedAuthority {
+	public static enum Role {
 		STUDENT, ADMIN;
-		@Override
-		public String getAuthority() {
-			return name();
-		}
 	}
 	
 	private String id;
