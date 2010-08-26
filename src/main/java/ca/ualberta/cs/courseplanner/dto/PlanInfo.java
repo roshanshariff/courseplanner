@@ -4,15 +4,15 @@ public class PlanInfo implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 9056869107744111310L;
 
-	private Long id;
+	private long id;
 	
 	private String name;
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 

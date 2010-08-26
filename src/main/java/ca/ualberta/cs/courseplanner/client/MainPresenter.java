@@ -56,10 +56,10 @@ public class MainPresenter implements Presenter, ValueChangeHandler<String> {
 							if (result == null) return;
 							container.clear();
 							container.add(new HTML(
-									"<h1>"
+									""
 									+ result.getSubjectId() + " "
 									+ result.getNumber() + " "
-									+ result.getTitle() + "</h1>"
+									+ result.getTitle() + "<br>"
 									+ "<i>" + result.getOrg1Name() + "</i><br/>"
 									+ "<i>" + result.getOrg2Name() + "</i><br/>"
 									+ "<p>" + result.getDescription() + "</p>"

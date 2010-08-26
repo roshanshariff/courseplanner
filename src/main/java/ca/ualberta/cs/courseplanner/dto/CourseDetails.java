@@ -6,7 +6,7 @@ public class CourseDetails implements java.io.Serializable {
 	
 	private static final long serialVersionUID = -1751498711180009857L;
 
-	private Long id;
+	private long id;
 	
 	private String subjectId, subjectName;
 	private String number;
@@ -21,12 +21,12 @@ public class CourseDetails implements java.io.Serializable {
 	private String description;
 
 	
-	public Long getId () {
+	public long getId () {
 		return id;
 	}
 
 	
-	public void setId (Long id) {
+	public void setId (long id) {
 		this.id = id;
 	}
 

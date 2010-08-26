@@ -111,7 +111,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
-			<version>3.1.0.GA</version>
+			<version>${hibernate.search.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 			<exclusions>
@@ -187,21 +187,21 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>${spring.version}</version>
+			<version>${spring.security.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>${spring.version}</version>
+			<version>${spring.security.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>${spring.version}</version>
+			<version>${spring.security.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -241,8 +241,9 @@
 	<properties>
 		<servlet.version>2.5</servlet.version>
 		<gwt.version>2.0.4</gwt.version>
-		<hibernate.version>3.5.3-Final</hibernate.version>
-		<hibernate.search.version>3.2.0.Final</hibernate.search.version>
-		<spring.version>3.0.3.RELEASE</spring.version>
+		<hibernate.version>3.5.5-Final</hibernate.version>
+		<hibernate.search.version>3.2.1.Final</hibernate.search.version>
+		<spring.version>3.0.4.RELEASE</spring.version>
+		<spring.security.version>3.0.3.RELEASE</spring.security.version>
 	</properties>
 </project>

@@ -1,28 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:UiBinder
-  xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'
-  xmlns:courseplanner='urn:import:ca.ualberta.cs.courseplanner.client'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:courseplanner='urn:import:ca.ualberta.cs.courseplanner.client'>
 
-  <g:DockLayoutPanel unit='EM'>
-    <g:north size='5'>
-      <g:HTML>
-      	<h1>University of Alberta Course Planner</h1>
-      </g:HTML>
-    </g:north>
+	<ui:style>
+		.header {
+			
+		}
+		
+		.navBar {
+			width: 15em;
+			float: left;
+			border-bottom: solid 1px #666666;
+		}
+		
+		.navBarItem {
+			display: block;
+			padding: 0.5em 1em;
+		}
+		
+		.navBarNewItem {
+			border-top: solid 1px #666666;
+		}
+		
+		.navBarHeader {
+			text-transform: uppercase;
+			color: #666666;
+			font-weight: bold;
+			font-size: 0.75em;
+			padding: 0.5em 0.75em 0em;
+		}
+		
+		.mainPanel {
+			margin-left: 15em;
+		}
+		
+		.searchBox {
+			text-align: right;
+			padding: 0.5em;
+		}
+		
+		.searchBox a {
+			padding: 0.5em;
+		}
+		
+		.contentPanel {
+			padding: 2em;
+		}
+		
+		.footer {
+			clear: both;
+			text-align: center;
+			padding: 3em;
+		}
+		
+	</ui:style>
 
-	<g:west size="10">
-		<g:HTML>
-			All courses
+	<g:FlowPanel>
+
+		<g:FlowPanel addStyleNames="{style.navBar}">
+
+			<g:InlineHTML addStyleNames="{style.navBarItem}">
+				<b>rshariff@ualberta.ca</b>
+				<br />
+				<a href="javascript:">Sign out</a>
+				|
+				<a href="javascript:">Settings</a>
+			</g:InlineHTML>
+
+			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}">My Transcript...</g:Anchor>
+
+			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}">Create Plan...</g:Anchor>
+
+			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Plans</g:Label>
+
+			<g:FlowPanel addStyleNames="{style.navBarItem}">
+				<g:Hyperlink>My First Plan</g:Hyperlink>
+				<g:Hyperlink>Another Plan</g:Hyperlink>
+				<g:Hyperlink>Best Plan Ever</g:Hyperlink>
+				<g:Hyperlink>Worst Plan Ever</g:Hyperlink>
+			</g:FlowPanel>
+
+			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Saved Searches</g:Label>
+
+			<g:FlowPanel addStyleNames="{style.navBarItem}">
+				<g:Hyperlink>Comp. Sci.</g:Hyperlink>
+				<g:Hyperlink>400 level Engineering</g:Hyperlink>
+				<g:Hyperlink>Possible Arts Options</g:Hyperlink>
+				<g:Hyperlink>Interesting Courses</g:Hyperlink>
+			</g:FlowPanel>
+
+		</g:FlowPanel>
+
+		<g:FlowPanel addStyleNames="{style.mainPanel}"
+			ui:field="content">
+			<g:FlowPanel>
+				<g:FlowPanel addStyleNames="{style.searchBox}">
+					<g:TextBox visibleLength="50">Search Courses</g:TextBox>
+					<g:Button>Search</g:Button>
+					<g:InlineHyperlink>Search options &#0187;</g:InlineHyperlink>
+				</g:FlowPanel>
+				<g:FlowPanel addStyleNames="{style.contentPanel}">
+					<g:Label>Rest of content.</g:Label>
+				</g:FlowPanel>
+			</g:FlowPanel>
+		</g:FlowPanel>
+
+		<g:HTML addStyleNames="{style.footer}">
+			<a href="#">Help</a> |
+			<a href="http://www.cs.ualberta.ca/">Department of Computing Science</a> |
+			<a href="http://www.ualberta.ca/">University of Alberta</a>
 		</g:HTML>
-	</g:west>
 
-    <g:center>
-		<g:HTML>
-			Course Details Here
-		</g:HTML>
-    </g:center>
-    
-  </g:DockLayoutPanel>
+	</g:FlowPanel>
 
 </ui:UiBinder>
