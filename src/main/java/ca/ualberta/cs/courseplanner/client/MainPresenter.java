@@ -3,6 +3,7 @@ package ca.ualberta.cs.courseplanner.client;
 import ca.ualberta.cs.courseplanner.client.presenter.Presenter;
 import ca.ualberta.cs.courseplanner.domain.Course;
 import ca.ualberta.cs.courseplanner.dto.CourseDetails;
+import ca.ualberta.cs.courseplanner.services.CourseDataServiceAsync;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -19,11 +20,11 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class MainPresenter implements Presenter, ValueChangeHandler<String> {
 	
-	private DataServiceAsync courseDataService;	
+	private CourseDataServiceAsync courseDataService;	
 	private HandlerManager eventBus;
 	private HasWidgets container;
 	
-	public MainPresenter (DataServiceAsync courseDataService, HandlerManager eventBus) {
+	public MainPresenter (CourseDataServiceAsync courseDataService, HandlerManager eventBus) {
 		this.courseDataService = courseDataService;
 		this.eventBus = eventBus;
 		bind();

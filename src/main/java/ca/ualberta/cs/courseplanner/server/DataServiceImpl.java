@@ -6,13 +6,13 @@ import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.ualberta.cs.courseplanner.client.DataService;
 import ca.ualberta.cs.courseplanner.domain.Plan;
 import ca.ualberta.cs.courseplanner.domain.User;
 import ca.ualberta.cs.courseplanner.dto.*;
+import ca.ualberta.cs.courseplanner.services.CourseDataService;
 
 
-public class DataServiceImpl implements DataService {
+public class DataServiceImpl implements CourseDataService {
 
 	private DataRepository data;
 	

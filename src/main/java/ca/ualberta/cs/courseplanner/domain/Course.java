@@ -3,6 +3,8 @@ package ca.ualberta.cs.courseplanner.domain;
 import javax.persistence.*;
 import org.hibernate.search.annotations.*;
 
+import ca.ualberta.cs.courseplanner.dto.Career;
+
 @Entity
 @Table(name="courses")
 @Indexed

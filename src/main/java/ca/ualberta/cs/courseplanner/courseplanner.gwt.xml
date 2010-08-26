@@ -4,6 +4,7 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.user.theme.standard.Standard" />
 	<source path="client" />
+	<source path="services" />
 	<source path="domain" />
 	<source path="dto" />
 	<entry-point class="ca.ualberta.cs.courseplanner.client.CoursePlanner" />

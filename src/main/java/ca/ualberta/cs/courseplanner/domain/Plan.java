@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.persistence.*;
 
+import ca.ualberta.cs.courseplanner.dto.CoursePlanInfo;
+
 @Entity
 @Table(name="plans")
 public class Plan {

@@ -1,4 +1,4 @@
-package ca.ualberta.cs.courseplanner.domain;
+package ca.ualberta.cs.courseplanner.dto;
 
 import javax.persistence.*;
 

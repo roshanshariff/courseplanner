@@ -1,5 +1,8 @@
 package ca.ualberta.cs.courseplanner.client;
 
+import ca.ualberta.cs.courseplanner.services.CourseDataService;
+import ca.ualberta.cs.courseplanner.services.CourseDataServiceAsync;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
@@ -27,7 +30,7 @@ public class CoursePlanner extends UIObject implements EntryPoint {
 		RootLayoutPanel root = RootLayoutPanel.get();
 		root.add(main);
 		
-		DataServiceAsync courseDataService = (DataServiceAsync) GWT.create(DataService.class);
+		CourseDataServiceAsync courseDataService = (CourseDataServiceAsync) GWT.create(CourseDataService.class);
 		HandlerManager eventBus = new HandlerManager(null);
 		MainPresenter controller = new MainPresenter(courseDataService, eventBus);
 		controller.present(content);

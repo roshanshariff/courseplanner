@@ -3,6 +3,7 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:courseplanner='urn:import:ca.ualberta.cs.courseplanner.client'>
 
 	<ui:style>
+	
 		.header {
 			
 		}

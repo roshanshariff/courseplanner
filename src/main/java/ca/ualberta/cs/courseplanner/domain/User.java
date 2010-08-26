@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import ca.ualberta.cs.courseplanner.dto.CourseHistoryInfo;
+
 @Entity
 @Table(name="users")
 public class User {
