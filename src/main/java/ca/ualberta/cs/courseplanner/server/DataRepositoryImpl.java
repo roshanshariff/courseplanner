@@ -2,14 +2,12 @@ package ca.ualberta.cs.courseplanner.server;
 
 import java.util.List;
 
-import org.dozer.Mapper;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.domain.*;
-import ca.ualberta.cs.courseplanner.dto.CourseDetails;
 
 @Repository
 public class DataRepositoryImpl implements DataRepository {
@@ -32,6 +30,22 @@ public class DataRepositoryImpl implements DataRepository {
 
 	@Override
 	@Transactional(readOnly=true)
+	public List<Subject> getSubjects () {
+		@SuppressWarnings("unchecked")
+		List<Subject> result = getSession().createCriteria(Subject.class).list();
+		return result;
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Organisation> getOrganisations () {
+		@SuppressWarnings("unchecked")
+		List<Organisation> result = getSession().createCriteria(Organisation.class).list();
+		return result;
+	}
+
+	@Override
+	@Transactional(readOnly=true)
 	public User getUser(String id) {
 		return (User)getSession().load(User.class, id);
 	}
@@ -50,23 +64,13 @@ public class DataRepositoryImpl implements DataRepository {
 	@Override
 	@Transactional(readOnly=true)
 	public Plan getPlan(Long id) {
-		return (Plan)sessionFactory.getCurrentSession().load(Plan.class, id);
+		return (Plan)getSession().load(Plan.class, id);
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	@Transactional(readOnly=true)
-	public List<Subject> getSubjects () {
-		return sessionFactory.getCurrentSession()
-		.createCriteria(Subject.class).list();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	@Transactional(readOnly=true)
-	public List<Organisation> getOrganisations () {
-		return sessionFactory.getCurrentSession()
-		.createCriteria(Organisation.class).list();
+	@Transactional
+	public void deletePlan (Plan plan) {
+		getSession().delete(plan);
 	}
 
 }
