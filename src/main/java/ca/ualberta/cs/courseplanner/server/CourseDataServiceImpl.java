@@ -3,7 +3,7 @@ package ca.ualberta.cs.courseplanner.server;
 import org.dozer.Mapper;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.ualberta.cs.courseplanner.dto.*;
+import ca.ualberta.cs.courseplanner.model.*;
 import ca.ualberta.cs.courseplanner.services.CourseDataService;
 
 

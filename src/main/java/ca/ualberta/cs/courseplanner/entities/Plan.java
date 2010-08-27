@@ -1,10 +1,10 @@
-package ca.ualberta.cs.courseplanner.domain;
+package ca.ualberta.cs.courseplanner.entities;
 
 import java.util.Map;
 
 import javax.persistence.*;
 
-import ca.ualberta.cs.courseplanner.dto.CoursePlanInfo;
+import ca.ualberta.cs.courseplanner.model.CoursePlanInfo;
 
 @Entity
 @Table(name="plans")

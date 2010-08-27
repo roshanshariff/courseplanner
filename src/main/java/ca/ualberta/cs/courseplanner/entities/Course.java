@@ -1,9 +1,9 @@
-package ca.ualberta.cs.courseplanner.domain;
+package ca.ualberta.cs.courseplanner.entities;
 
 import javax.persistence.*;
 import org.hibernate.search.annotations.*;
 
-import ca.ualberta.cs.courseplanner.dto.Career;
+import ca.ualberta.cs.courseplanner.model.Career;
 
 @Entity
 @Table(name="courses")

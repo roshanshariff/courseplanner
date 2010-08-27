@@ -1,6 +1,6 @@
 package ca.ualberta.cs.courseplanner.server;
 
-import ca.ualberta.cs.courseplanner.dto.CourseDetails;
+import ca.ualberta.cs.courseplanner.model.CourseDetails;
 import ca.ualberta.cs.courseplanner.services.CourseDataService;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;

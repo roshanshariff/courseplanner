@@ -10,7 +10,7 @@ import org.hibernate.search.Search;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import ca.ualberta.cs.courseplanner.domain.Course;
+import ca.ualberta.cs.courseplanner.entities.Course;
 
 public class BuildIndex {
 

@@ -4,8 +4,8 @@
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
 	<mapping type="one-way">
-		<class-a>ca.ualberta.cs.courseplanner.domain.Course</class-a>
-		<class-b>ca.ualberta.cs.courseplanner.dto.CourseDetails</class-b>
+		<class-a>ca.ualberta.cs.courseplanner.entities.Course</class-a>
+		<class-b>ca.ualberta.cs.courseplanner.model.CourseDetails</class-b>
 		<field>
 			<a>subject.id</a>
 			<b>subjectId</b>

@@ -2,7 +2,7 @@ package ca.ualberta.cs.courseplanner.server;
 
 import java.util.List;
 
-import ca.ualberta.cs.courseplanner.domain.*;
+import ca.ualberta.cs.courseplanner.entities.*;
 
 public interface DataRepository {
 	

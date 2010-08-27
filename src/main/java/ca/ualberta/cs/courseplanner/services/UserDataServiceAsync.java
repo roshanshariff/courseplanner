@@ -2,9 +2,9 @@ package ca.ualberta.cs.courseplanner.services;
 
 import java.util.Map;
 
-import ca.ualberta.cs.courseplanner.dto.CourseInfo;
-import ca.ualberta.cs.courseplanner.dto.CoursePlanInfo;
-import ca.ualberta.cs.courseplanner.dto.PlanInfo;
+import ca.ualberta.cs.courseplanner.model.CourseInfo;
+import ca.ualberta.cs.courseplanner.model.CoursePlanInfo;
+import ca.ualberta.cs.courseplanner.model.PlanInfo;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

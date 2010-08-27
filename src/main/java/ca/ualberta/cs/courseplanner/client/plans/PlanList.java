@@ -2,7 +2,7 @@ package ca.ualberta.cs.courseplanner.client.plans;
 
 import java.util.List;
 
-import ca.ualberta.cs.courseplanner.dto.PlanInfo;
+import ca.ualberta.cs.courseplanner.model.PlanInfo;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.CssResource;

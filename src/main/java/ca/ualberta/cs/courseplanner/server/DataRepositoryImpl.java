@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.ualberta.cs.courseplanner.domain.*;
+import ca.ualberta.cs.courseplanner.entities.*;
 
 @Repository
 public class DataRepositoryImpl implements DataRepository {

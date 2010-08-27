@@ -1,6 +1,6 @@
 package ca.ualberta.cs.courseplanner.services;
 
-import ca.ualberta.cs.courseplanner.dto.CourseDetails;
+import ca.ualberta.cs.courseplanner.model.CourseDetails;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

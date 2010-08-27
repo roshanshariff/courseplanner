@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.ualberta.cs.courseplanner.domain.User;
-import ca.ualberta.cs.courseplanner.domain.User.Role;
+import ca.ualberta.cs.courseplanner.entities.User;
+import ca.ualberta.cs.courseplanner.entities.User.Role;
 
 @Repository
 public class UserDetailsServiceImpl implements UserDetailsService {

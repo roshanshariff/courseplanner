@@ -15,8 +15,9 @@
 		class="org.springframework.web.servlet.handler.SimpleServletPostProcessor">
 	</bean>
 
+
 	<bean id="courseDataServlet" name="/courseplanner/coursedata"
-		class="ca.ualberta.cs.courseplanner.server.DataServlet">
+		class="ca.ualberta.cs.courseplanner.server.CourseDataServlet">
 		<property name="service" ref="courseDataService"/>
 	</bean>
 	

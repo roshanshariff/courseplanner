@@ -1,10 +1,10 @@
-package ca.ualberta.cs.courseplanner.domain;
+package ca.ualberta.cs.courseplanner.entities;
 
 import java.util.*;
 
 import javax.persistence.*;
 
-import ca.ualberta.cs.courseplanner.dto.CourseHistoryInfo;
+import ca.ualberta.cs.courseplanner.model.CourseHistoryInfo;
 
 @Entity
 @Table(name="users")

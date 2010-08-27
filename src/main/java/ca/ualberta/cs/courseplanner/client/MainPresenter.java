@@ -1,8 +1,8 @@
 package ca.ualberta.cs.courseplanner.client;
 
 import ca.ualberta.cs.courseplanner.client.presenter.Presenter;
-import ca.ualberta.cs.courseplanner.domain.Course;
-import ca.ualberta.cs.courseplanner.dto.CourseDetails;
+import ca.ualberta.cs.courseplanner.entities.Course;
+import ca.ualberta.cs.courseplanner.model.CourseDetails;
 import ca.ualberta.cs.courseplanner.services.CourseDataServiceAsync;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;

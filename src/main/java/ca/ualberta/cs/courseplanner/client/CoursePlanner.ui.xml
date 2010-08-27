@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:courseplanner='urn:import:ca.ualberta.cs.courseplanner.client'>
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:view='urn:import:ca.ualberta.cs.courseplanner.client.views'>
 
 	<ui:style>
 	
@@ -11,7 +12,7 @@
 		.navBar {
 			width: 15em;
 			float: left;
-			border-bottom: solid 1px #666666;
+			border-bottom: solid 1px #CCCCCC;
 		}
 		
 		.navBarItem {
@@ -20,7 +21,7 @@
 		}
 		
 		.navBarNewItem {
-			border-top: solid 1px #666666;
+			border-top: solid 1px #CCCCCC;
 		}
 		
 		.navBarHeader {
@@ -68,39 +69,26 @@
 				<a href="javascript:">Settings</a>
 			</g:InlineHTML>
 
-			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}">My Transcript...</g:Anchor>
+			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">My Transcript</g:Anchor>
 
-			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}">Create Plan...</g:Anchor>
+			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">Create Plan...</g:Anchor>
 
 			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Plans</g:Label>
-
-			<g:FlowPanel addStyleNames="{style.navBarItem}">
-				<g:Hyperlink>My First Plan</g:Hyperlink>
-				<g:Hyperlink>Another Plan</g:Hyperlink>
-				<g:Hyperlink>Best Plan Ever</g:Hyperlink>
-				<g:Hyperlink>Worst Plan Ever</g:Hyperlink>
-			</g:FlowPanel>
+			<view:HyperlinkListView ui:field='planList' addStyleNames="{style.navBarItem}" />
 
 			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Saved Searches</g:Label>
-
-			<g:FlowPanel addStyleNames="{style.navBarItem}">
-				<g:Hyperlink>Comp. Sci.</g:Hyperlink>
-				<g:Hyperlink>400 level Engineering</g:Hyperlink>
-				<g:Hyperlink>Possible Arts Options</g:Hyperlink>
-				<g:Hyperlink>Interesting Courses</g:Hyperlink>
-			</g:FlowPanel>
+			<view:HyperlinkListView ui:field='searchList' addStyleNames="{style.navBarItem}" />
 
 		</g:FlowPanel>
 
-		<g:FlowPanel addStyleNames="{style.mainPanel}"
-			ui:field="content">
+		<g:FlowPanel addStyleNames="{style.mainPanel}">
 			<g:FlowPanel>
 				<g:FlowPanel addStyleNames="{style.searchBox}">
 					<g:TextBox visibleLength="50">Search Courses</g:TextBox>
 					<g:Button>Search</g:Button>
 					<g:InlineHyperlink>Search options &#0187;</g:InlineHyperlink>
 				</g:FlowPanel>
-				<g:FlowPanel addStyleNames="{style.contentPanel}">
+				<g:FlowPanel ui:field="content" addStyleNames="{style.contentPanel}">
 					<g:Label>Rest of content.</g:Label>
 				</g:FlowPanel>
 			</g:FlowPanel>

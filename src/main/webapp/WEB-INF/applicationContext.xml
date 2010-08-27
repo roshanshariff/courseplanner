@@ -24,7 +24,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="ca.ualberta.cs.courseplanner.domain" />
+		<property name="packagesToScan" value="ca.ualberta.cs.courseplanner.entities" />
 
 		<property name="hibernateProperties">
 			<props>
@@ -36,7 +36,7 @@
           			org.hibernate.search.store.FSDirectoryProvider
           		</prop> 
 				<prop key="hibernate.search.default.indexBase"> 
-		        	file:/var/lucene/indexes
+		        	WEB-INF/indexes
 		        </prop>	
 			</props>
 		</property>
@@ -55,12 +55,17 @@
 		<property name="mappingFiles" value="file:WEB-INF/mapping.xml" />
 	</bean>
 
-	<bean id="courseData" class="ca.ualberta.cs.courseplanner.server.DataRepositoryImpl">
+	<bean id="dataRepository" class="ca.ualberta.cs.courseplanner.server.DataRepositoryImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="courseDataService" class="ca.ualberta.cs.courseplanner.server.DataServiceImpl">
-		<property name="data" ref="courseData"/>
+	<bean id="courseDataService" class="ca.ualberta.cs.courseplanner.server.CourseDataServiceImpl">
+		<property name="data" ref="dataRepository"/>
+		<property name="mapper" ref="mapper"/>
+	</bean>
+	
+	<bean id="userDataService" class="ca.ualberta.cs.courseplanner.server.UserDataServiceImpl">
+		<property name="data" ref="dataRepository"/>
 		<property name="mapper" ref="mapper"/>
 	</bean>
 	

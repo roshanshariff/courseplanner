@@ -8,10 +8,10 @@ import java.util.Map;
 import org.dozer.Mapper;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.ualberta.cs.courseplanner.domain.Course;
-import ca.ualberta.cs.courseplanner.domain.Plan;
-import ca.ualberta.cs.courseplanner.domain.User;
-import ca.ualberta.cs.courseplanner.dto.*;
+import ca.ualberta.cs.courseplanner.entities.Course;
+import ca.ualberta.cs.courseplanner.entities.Plan;
+import ca.ualberta.cs.courseplanner.entities.User;
+import ca.ualberta.cs.courseplanner.model.*;
 import ca.ualberta.cs.courseplanner.services.UserDataService;
 
 
