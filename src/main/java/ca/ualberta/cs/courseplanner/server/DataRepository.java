@@ -14,6 +14,8 @@ public interface DataRepository {
 	
 	public Plan getPlan (Long id);
 	
+	public List<Plan> getUserPlans (String userId);
+	
 	public void deletePlan (Plan plan);
 	
 	public List<Subject> getSubjects ();

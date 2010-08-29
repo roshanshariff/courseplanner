@@ -74,10 +74,10 @@
 			<g:Anchor ui:field="createPlanLink" addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">Create Plan...</g:Anchor>
 
 			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Plans</g:Label>
-			<view:HyperlinkListView ui:field='planList' addStyleNames="{style.navBarItem}" />
+			<g:FlowPanel ui:field='planList' addStyleNames="{style.navBarItem}" />
 
 			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Saved Searches</g:Label>
-			<view:HyperlinkListView ui:field='searchList' addStyleNames="{style.navBarItem}" />
+			<g:FlowPanel ui:field='searchList' addStyleNames="{style.navBarItem}" />
 
 		</g:FlowPanel>
 

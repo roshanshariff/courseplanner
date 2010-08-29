@@ -1,4 +1,4 @@
-package ca.ualberta.cs.courseplanner.client.events.intents;
+package ca.ualberta.cs.courseplanner.client.intents;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -26,13 +26,13 @@ public abstract class Intent <V, H extends Intent.Handler> extends GwtEvent<H> {
 		this(null);
 	}
 	
-	void completed (V result) {
+	public void completed (V result) {
 		if (callback != null) {
 			callback.onCompleted(result);
 		}
 	}
 	
-	void cancelled () {
+	public void cancelled () {
 		if (callback != null) {
 			callback.onCancelled();
 		}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:view='urn:import:ca.ualberta.cs.courseplanner.client.views'>
+
+	<ui:style>
+	
+		@external .Caption, .dialogContent;
+	
+		.dialog .Caption {
+			font-weight: bold;
+		}
+		
+		.dialog .dialogContent {
+			margin: 0.5em;
+		}
+		
+		.prompt {
+			padding: 0em 0em 0.5em;
+			width: 300px;
+		}
+		
+		.input {
+			width: 300px;
+		}
+		
+		.buttons {
+			text-align: right;
+			margin: 1em 0em 0em;
+		}
+		
+		.buttons button {
+			margin-left: 0.5em;
+		}
+		
+	</ui:style>
+
+	<g:DialogBox ui:field="dialog" addStyleNames="{style.dialog}"
+		autoHide="false" modal="true" glassEnabled="true">
+
+		<g:caption></g:caption>
+
+		<g:FlowPanel>
+
+			<g:Label ui:field="prompt" wordWrap="true" addStyleNames="{style.prompt}" />
+
+			<g:TextBox ui:field="input" addStyleNames="{style.input}" />
+
+			<g:FlowPanel addStyleNames="{style.buttons}">
+				<g:Button ui:field="submit">Submit</g:Button>
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</g:FlowPanel>
+
+		</g:FlowPanel>
+
+	</g:DialogBox>
+
+</ui:UiBinder>

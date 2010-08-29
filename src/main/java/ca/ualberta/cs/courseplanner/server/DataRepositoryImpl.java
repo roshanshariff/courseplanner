@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,6 +68,17 @@ public class DataRepositoryImpl implements DataRepository {
 		return (Plan)getSession().load(Plan.class, id);
 	}
 	
+	@Override
+	public List<Plan> getUserPlans (String userId) {
+		@SuppressWarnings("unchecked")
+		List<Plan> result = getSession()
+			.createCriteria(Plan.class)
+			.createCriteria("user")
+				.add(Restrictions.idEq(userId))
+			.list();
+		return result;
+	}
+
 	@Override
 	@Transactional
 	public void deletePlan (Plan plan) {

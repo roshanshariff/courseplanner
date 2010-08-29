@@ -15,12 +15,12 @@
 	</bean>
 
 
-	<bean id="courseDataServlet" name="/courseplanner/coursedata"
+	<bean id="courseDataServlet" name="/services/coursedata"
 		class="ca.ualberta.cs.courseplanner.server.CourseDataServlet">
 		<property name="service" ref="courseDataService" />
 	</bean>
 
-	<bean id="userDataServlet" name="/courseplanner/userdata"
+	<bean id="userDataServlet" name="/services/userdata"
 		class="ca.ualberta.cs.courseplanner.server.UserDataServlet">
 		<property name="service" ref="userDataService" />
 	</bean>

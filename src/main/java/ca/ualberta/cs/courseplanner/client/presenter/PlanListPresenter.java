@@ -1,4 +1,4 @@
-package ca.ualberta.cs.courseplanner.client.plans;
+package ca.ualberta.cs.courseplanner.client.presenter;
 
 
 import com.google.gwt.event.shared.HandlerManager;
@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Hyperlink;
 
 import ca.ualberta.cs.courseplanner.client.events.PlanListChangedEvent;
+import ca.ualberta.cs.courseplanner.client.plans.PlanManager;
 import ca.ualberta.cs.courseplanner.model.PlanInfo;
 
 
@@ -41,12 +42,14 @@ public class PlanListPresenter implements PlanListChangedEvent.Handler {
 	@Override
 	public void onPlanListChanged (PlanInfo[] plans) {
 		this.plans = plans;
+		update();
+	}
+	
+	private void update () {
 		container.clear();
 		for (PlanInfo plan : plans) {
 			container.add(new Hyperlink(plan.getName(), false, "plan:"+plan.getId()));
-		}
+		}		
 	}
-	
-
 
 }

@@ -1,4 +1,4 @@
-package ca.ualberta.cs.courseplanner.client.events.intents;
+package ca.ualberta.cs.courseplanner.client.intents;
 
 import ca.ualberta.cs.courseplanner.model.PlanInfo;
 

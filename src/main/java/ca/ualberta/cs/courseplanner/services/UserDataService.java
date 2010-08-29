@@ -9,7 +9,7 @@ import ca.ualberta.cs.courseplanner.model.PlanInfo;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-@RemoteServiceRelativePath("userdata")
+@RemoteServiceRelativePath("../services/userdata")
 public interface UserDataService extends RemoteService {
 	
 	PlanInfo createPlan (String planName);

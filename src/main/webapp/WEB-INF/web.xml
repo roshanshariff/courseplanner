@@ -35,7 +35,12 @@
 
 	<servlet-mapping>
 		<servlet-name>courseplanner</servlet-name>
-		<url-pattern>/courseplanner/coursedata</url-pattern>
+		<url-pattern>/services/coursedata</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>courseplanner</servlet-name>
+		<url-pattern>/services/userdata</url-pattern>
 	</servlet-mapping>
 
 </web-app>

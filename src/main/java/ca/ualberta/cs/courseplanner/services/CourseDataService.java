@@ -6,7 +6,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 
-@RemoteServiceRelativePath("coursedata")
+@RemoteServiceRelativePath("../services/coursedata")
 public interface CourseDataService extends RemoteService {
 	
 	public CourseDetails getCourseDetails (Long id);

@@ -57,7 +57,7 @@ public class UserDataServiceImpl implements UserDataService {
 	@Transactional(readOnly=true)
 	public PlanInfo[] getPlans () {
 		List<PlanInfo> plans = new ArrayList<PlanInfo>();
-		for (Plan plan : getCurrentUser().getPlans()) {
+		for (Plan plan : data.getUserPlans(userIdProvider.getUserId())) {
 			plans.add(mapper.map(plan, PlanInfo.class));
 		}
 		return plans.toArray(new PlanInfo[plans.size()]);
