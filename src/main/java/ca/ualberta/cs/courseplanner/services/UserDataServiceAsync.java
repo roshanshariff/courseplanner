@@ -25,6 +25,9 @@ public interface UserDataServiceAsync {
 	void addPlanCourse(long planId, long courseId, CoursePlanInfo info,
 			AsyncCallback<Void> callback);
 
+	void addPlanCourses (long planId, long[] courseIds,
+			AsyncCallback<Void> callback);
+
 	void getPlanCourse(long planId, long courseId,
 			AsyncCallback<CoursePlanInfo> callback);
 

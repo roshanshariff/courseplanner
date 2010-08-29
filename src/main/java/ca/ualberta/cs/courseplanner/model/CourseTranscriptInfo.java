@@ -3,7 +3,7 @@ package ca.ualberta.cs.courseplanner.model;
 import javax.persistence.*;
 
 @Embeddable
-public class CourseHistoryInfo implements java.io.Serializable {
+public class CourseTranscriptInfo implements java.io.Serializable {
 
 	public static enum Type { TAKEN, CREDITED, WAIVED }
 	

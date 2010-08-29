@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ca.ualberta.cs.courseplanner.client.views.CreatePlanView;
 import ca.ualberta.cs.courseplanner.client.views.HyperlinkListView;
 import ca.ualberta.cs.courseplanner.model.PlanInfo;
 import ca.ualberta.cs.courseplanner.model.SavedSearchInfo;
@@ -12,12 +13,17 @@ import ca.ualberta.cs.courseplanner.services.CourseDataServiceAsync;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 
@@ -59,9 +65,9 @@ public class CoursePlanner implements EntryPoint {
 
 	public void onModuleLoad () {
 		
+		Document.get().getBody().getStyle().setOverflow(Style.Overflow.HIDDEN);
 		FlowPanel main = binder.createAndBindUi(this);
-		RootPanel root = RootPanel.get();
-		root.add(main);
+		RootLayoutPanel.get().add(new ScrollPanel(main));
 		
 		CourseDataServiceAsync courseDataService = (CourseDataServiceAsync) GWT.create(CourseDataService.class);
 		HandlerManager eventBus = new HandlerManager(null);
@@ -75,6 +81,11 @@ public class CoursePlanner implements EntryPoint {
 		plans.add(new PlanInfo(4, "Worst Plan Ever"));
 		Collections.sort(plans);
 		planList.setData(plans);
+	}
+	
+	@UiHandler("createPlanLink")
+	void handleCreatePlan (ClickEvent event) {
+		new CreatePlanView();
 	}
 
 }

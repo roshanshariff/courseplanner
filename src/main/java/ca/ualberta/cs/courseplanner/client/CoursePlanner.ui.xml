@@ -71,7 +71,7 @@
 
 			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">My Transcript</g:Anchor>
 
-			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">Create Plan...</g:Anchor>
+			<g:Anchor ui:field="createPlanLink" addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">Create Plan...</g:Anchor>
 
 			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Plans</g:Label>
 			<view:HyperlinkListView ui:field='planList' addStyleNames="{style.navBarItem}" />

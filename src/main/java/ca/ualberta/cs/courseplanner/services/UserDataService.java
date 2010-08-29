@@ -26,6 +26,8 @@ public interface UserDataService extends RemoteService {
 	
 	void addPlanCourse (long planId, long courseId, CoursePlanInfo info);
 	
+	void addPlanCourses (long planId, long[] courseIds);
+	
 	CoursePlanInfo getPlanCourse (long planId, long courseId);
 	
 	Map<CourseInfo, CoursePlanInfo> getPlanCourses (long planId);

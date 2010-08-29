@@ -1,6 +1,6 @@
 package ca.ualberta.cs.courseplanner.server;
 
-public interface UserProvider {
+public interface UserIdProvider {
 	
 	String getUserId ();
 

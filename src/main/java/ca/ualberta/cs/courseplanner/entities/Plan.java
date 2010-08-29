@@ -20,40 +20,24 @@ public class Plan {
 	
 	@Id
 	@GeneratedValue
-	public Long getId () {
-		return id;
-	}
+	public Long getId () { return id; }
 	
-	public void setId (Long id) {
-		this.id = id;
-	}
+	public void setId (Long id) { this.id = id; }
 
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	public User getUser() {
-		return user;
-	}
+	public User getUser () { return user; }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+	public void setUser (User user) { this.user = user; }
 
-	public String getName() {
-		return name;
-	}
+	public String getName () { return name; }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	public void setName (String name) { this.name = name; }
 
 	@ElementCollection
 	@CollectionTable(name="plan_courses")
-	public Map<Course, CoursePlanInfo> getCourses() {
-		return courses;
-	}
+	public Map<Course, CoursePlanInfo> getCourses() { return courses; }
 
-	public void setCourses(Map<Course, CoursePlanInfo> courses) {
-		this.courses = courses;
-	}
+	public void setCourses(Map<Course, CoursePlanInfo> courses) { this.courses = courses; }
 
 }

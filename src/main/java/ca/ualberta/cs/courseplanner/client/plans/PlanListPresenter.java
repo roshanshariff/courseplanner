@@ -1,24 +1,52 @@
 package ca.ualberta.cs.courseplanner.client.plans;
 
-import java.util.List;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Hyperlink;
 
-import ca.ualberta.cs.courseplanner.client.presenter.Presenter;
+import ca.ualberta.cs.courseplanner.client.events.PlanListChangedEvent;
 import ca.ualberta.cs.courseplanner.model.PlanInfo;
 
-public interface PlanListPresenter extends Presenter {
+
+public class PlanListPresenter implements PlanListChangedEvent.Handler {
 	
-	public static interface View {
-		
-		public Widget getWidget ();
-		
-		public void setPresenter (PlanListPresenter presenter);
-		
-		public void setPlanList (List<PlanInfo> plans);
-		
+	private PlanInfo[] plans;
+	
+	private final PlanManager planManager;
+	
+	private final HandlerManager eventBus;
+	
+	private HasWidgets container;
+	
+	public PlanListPresenter (PlanManager planManager, HandlerManager eventBus) {
+		this.planManager = planManager;
+		this.eventBus = eventBus;
 	}
 	
-	public void createPlan ();
+	public void setContainer (HasWidgets container) {
+		this.container = container;
+	}
+	
+	public void start () {
+		eventBus.addHandler(PlanListChangedEvent.TYPE, this);
+		planManager.getPlans(this);
+	}
+	
+	public void stop () {
+		eventBus.removeHandler(PlanListChangedEvent.TYPE, this);
+		container.clear();
+	}
+
+	@Override
+	public void onPlanListChanged (PlanInfo[] plans) {
+		this.plans = plans;
+		container.clear();
+		for (PlanInfo plan : plans) {
+			container.add(new Hyperlink(plan.getName(), false, "plan:"+plan.getId()));
+		}
+	}
+	
+
 
 }

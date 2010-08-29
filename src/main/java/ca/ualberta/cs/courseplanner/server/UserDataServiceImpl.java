@@ -19,29 +19,29 @@ public class UserDataServiceImpl implements UserDataService {
 
 	private DataRepository data;
 	
-	private UserProvider currentUser;
-	
 	private Mapper mapper;
+	
+	private UserIdProvider userIdProvider;
 	
 	public void setData (DataRepository data) {
 		this.data = data;
-	}
-	
-	public void setUserProvider (UserProvider user) {
-		this.currentUser = user;
 	}
 	
 	public void setMapper (Mapper mapper) {
 		this.mapper = mapper;
 	}
 	
+	public void setUserIdProvider (UserIdProvider user) {
+		this.userIdProvider = user;
+	}
+	
 	private User getCurrentUser () {
-		return data.getUser(currentUser.getUserId());
+		return data.getUser(userIdProvider.getUserId());
 	}
 	
 	private Plan getPlan (Long planId) {
 		Plan plan = data.getPlan(planId);
-		if (plan.getUser().getId().equals(currentUser.getUserId())) {
+		if (plan.getUser().getId().equals(userIdProvider.getUserId())) {
 			throw new IllegalArgumentException ("Invalid plan identifier.");
 		}
 		return plan;
@@ -91,6 +91,15 @@ public class UserDataServiceImpl implements UserDataService {
 	@Transactional
 	public void addPlanCourse(long planId, long courseId, CoursePlanInfo info) {
 		getPlan(planId).getCourses().put(data.getCourse(courseId), info);
+	}
+
+	@Override
+	@Transactional
+	public void addPlanCourses (long planId, long[] courseIds) {
+		Map<Course, CoursePlanInfo> planCourses = getPlan(planId).getCourses();
+		for (long courseId : courseIds) {
+			planCourses.put(data.getCourse(courseId), new CoursePlanInfo());
+		}
 	}
 
 	@Override

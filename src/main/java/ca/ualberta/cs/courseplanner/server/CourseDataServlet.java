@@ -16,7 +16,7 @@ public class CourseDataServlet extends RemoteServiceServlet implements CourseDat
 	}
 
 	@Override
-	public CourseDetails getCourseDetails(Long id) {
+	public CourseDetails getCourseDetails (Long id) {
 		return service.getCourseDetails(id);
 	}
 

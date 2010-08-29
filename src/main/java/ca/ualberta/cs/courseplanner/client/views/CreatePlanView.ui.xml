@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:view='urn:import:ca.ualberta.cs.courseplanner.client.views'>
+	
+	<ui:style>
+	
+		.mainPanel {
+			padding: 0.5em;
+		}
+		
+		.label {
+			margin: 0em 0em 0.5em;
+		}
+		
+		.buttonPanel {
+			text-align: right;
+			margin: 1em 0em 0em;
+		}
+		
+		.buttonPanel button {
+			margin-left: 0.5em;
+		}
+		
+	</ui:style>
+
+	<g:DialogBox ui:field="dialog" autoHide="false" modal="true" glassEnabled="true">
+
+		<g:caption><b>Create Plan</b></g:caption>
+
+		<g:FormPanel ui:field="form" addStyleNames="{style.mainPanel}">
+
+			<g:FlowPanel >
+
+				<g:Label addStyleNames="{style.label}">Please enter a new plan name:</g:Label>
+
+				<g:TextBox ui:field="planName" visibleLength="50"/>
+
+				<g:FlowPanel addStyleNames="{style.buttonPanel}">
+					<g:Button ui:field="createButton" enabled="false">Create</g:Button>
+					<g:Button ui:field="cancelButton">Cancel</g:Button>
+				</g:FlowPanel>
+
+			</g:FlowPanel>
+
+		</g:FormPanel>
+
+	</g:DialogBox>
+
+</ui:UiBinder>

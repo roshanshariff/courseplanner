@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -32,12 +31,12 @@
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.id.new_generator_mappings">true</prop>
-				<prop key="hibernate.search.default.directory_provider"> 
-          			org.hibernate.search.store.FSDirectoryProvider
-          		</prop> 
-				<prop key="hibernate.search.default.indexBase"> 
-		        	WEB-INF/indexes
-		        </prop>	
+				<prop key="hibernate.search.default.directory_provider">
+					org.hibernate.search.store.FSDirectoryProvider
+          		</prop>
+				<prop key="hibernate.search.default.indexBase">
+					WEB-INF/indexes
+		        </prop>
 			</props>
 		</property>
 	</bean>
@@ -56,17 +55,23 @@
 	</bean>
 
 	<bean id="dataRepository" class="ca.ualberta.cs.courseplanner.server.DataRepositoryImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="courseDataService" class="ca.ualberta.cs.courseplanner.server.CourseDataServiceImpl">
-		<property name="data" ref="dataRepository"/>
-		<property name="mapper" ref="mapper"/>
+	<bean id="courseDataService"
+		class="ca.ualberta.cs.courseplanner.server.CourseDataServiceImpl">
+		<property name="data" ref="dataRepository" />
+		<property name="mapper" ref="mapper" />
 	</bean>
-	
+
 	<bean id="userDataService" class="ca.ualberta.cs.courseplanner.server.UserDataServiceImpl">
-		<property name="data" ref="dataRepository"/>
-		<property name="mapper" ref="mapper"/>
+		<property name="data" ref="dataRepository" />
+		<property name="mapper" ref="mapper" />
+		<property name="userIdProvider">
+			<bean class="ca.ualberta.cs.courseplanner.server.UserIdProviderMockImpl">
+				<property name="userId" value="testuser" />
+			</bean>
+		</property>
 	</bean>
-	
+
 </beans>

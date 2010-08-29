@@ -5,26 +5,31 @@
 
 	<mapping type="one-way">
 		<class-a>ca.ualberta.cs.courseplanner.entities.Course</class-a>
-		<class-b>ca.ualberta.cs.courseplanner.model.CourseDetails</class-b>
+		<class-b>ca.ualberta.cs.courseplanner.model.CourseInfo</class-b>
 		<field>
 			<a>subject.id</a>
 			<b>subjectId</b>
-		</field>
-		<field>
-			<a>subject.name</a>
-			<b>subjectName</b>
 		</field>
 		<field>
 			<a>org1.id</a>
 			<b>org1Id</b>
 		</field>
 		<field>
-			<a>org1.name</a>
-			<b>org1Name</b>
-		</field>
-		<field>
 			<a>org2.id</a>
 			<b>org2Id</b>
+		</field>
+	</mapping>
+
+	<mapping type="one-way">
+		<class-a>ca.ualberta.cs.courseplanner.entities.Course</class-a>
+		<class-b>ca.ualberta.cs.courseplanner.model.CourseDetails</class-b>
+		<field>
+			<a>subject.name</a>
+			<b>subjectName</b>
+		</field>
+		<field>
+			<a>org1.name</a>
+			<b>org1Name</b>
 		</field>
 		<field>
 			<a>org2.name</a>
