@@ -9,9 +9,12 @@
 	<url>http://www.ualberta.ca</url>
 	<repositories>
 		<repository>
-			<id>gwt-repo</id>
-			<name>Google Web Toolkit Repository</name>
-			<url>http://google-web-toolkit.googlecode.com/svn/2.1.0.M2/gwt/maven/</url>
+			<id>google-maven-snapshot-repository</id>
+			<name>Google Maven Snapshot Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 		<repository>
 			<id>jboss-public-repository</id>
@@ -21,9 +24,12 @@
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>gwt-repo</id>
-			<name>Google Web Toolkit Repository</name>
-			<url>http://google-web-toolkit.googlecode.com/svn/2.1.0.M1/gwt/maven/</url>
+			<id>google-maven-snapshot-repository</id>
+			<name>Google Maven Snapshot Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
 			<id>jboss-public-repository</id>
@@ -125,13 +131,6 @@
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
 			<version>3.12.1.GA</version>
-			<type>jar</type>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>2.2</version>
 			<type>jar</type>
 			<scope>runtime</scope>
 		</dependency>
@@ -240,7 +239,7 @@
 	</build>
 	<properties>
 		<servlet.version>2.5</servlet.version>
-		<gwt.version>2.0.4</gwt.version>
+		<gwt.version>2.1-SNAPSHOT</gwt.version>
 		<hibernate.version>3.5.5-Final</hibernate.version>
 		<hibernate.search.version>3.2.1.Final</hibernate.search.version>
 		<spring.version>3.0.4.RELEASE</spring.version>
