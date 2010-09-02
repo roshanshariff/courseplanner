@@ -5,10 +5,17 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.search.FullTextQuery;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
+import org.hibernate.transform.AliasToBeanResultTransformer;
+import org.hibernate.transform.BasicTransformerAdapter;
+import org.hibernate.transform.ResultTransformer;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.entities.*;
+import ca.ualberta.cs.courseplanner.model.CourseInfo;
 
 @Repository
 public class DataRepositoryImpl implements DataRepository {
@@ -84,5 +91,5 @@ public class DataRepositoryImpl implements DataRepository {
 	public void deletePlan (Plan plan) {
 		getSession().delete(plan);
 	}
-
+	
 }

@@ -1,6 +1,8 @@
 package ca.ualberta.cs.courseplanner.server;
 
 import ca.ualberta.cs.courseplanner.model.CourseDetails;
+import ca.ualberta.cs.courseplanner.model.CourseInfo;
+import ca.ualberta.cs.courseplanner.model.CourseSearchResults;
 import ca.ualberta.cs.courseplanner.services.CourseDataService;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -18,6 +20,10 @@ public class CourseDataServlet extends RemoteServiceServlet implements CourseDat
 	@Override
 	public CourseDetails getCourseDetails (Long id) {
 		return service.getCourseDetails(id);
+	}
+
+	public CourseSearchResults searchCourses (String query, int offset, int results) {
+		return service.searchCourses(query, offset, results);
 	}
 
 }

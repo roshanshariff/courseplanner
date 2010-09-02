@@ -17,7 +17,7 @@ public class Subject implements java.io.Serializable {
 	private String name;
 	
 	@Id
-	@Column(length=5)
+	@Column(length=6)
 	@Field(index=Index.UN_TOKENIZED, store=Store.YES)
 	public String getId () {
 		return id;
@@ -35,6 +35,10 @@ public class Subject implements java.io.Serializable {
 	
 	public void setName (String name) {
 		this.name = name;
+	}
+	
+	@Override public String toString () {
+		return name + " (" + id + ")"; 
 	}
 
 }

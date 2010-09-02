@@ -17,22 +17,20 @@ public class Organisation implements java.io.Serializable {
 	
 	@Id
 	@Column(length=10)
-	public String getId () {
-		return id;
-	}
+	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
+	public String getId () { return id; }
 	
-	public void setId (String id) {
-		this.id = id;
-	}
+	public void setId (String id) { this.id = id; }
 	
 	@Column(length=100)
 	@Field(index=Index.TOKENIZED, store=Store.NO)
-	public String getName () {
-		return name;
-	}
+	public String getName () { return name; }
 	
-	public void setName (String name) {
-		this.name = name;
+	public void setName (String name) { this.name = name; }
+	
+	@Override
+	public String toString () {
+		return name;
 	}
 	
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:cell='urn:import:com.google.gwt.user.cellview.client'
+	xmlns:view='urn:import:ca.ualberta.cs.courseplanner.client.views'>
+
+	<ui:style>
+	
+		.bottomPanel {
+			float: right;
+		}
+		
+		.bottomPanel input {
+			float: left;
+		}
+		
+		@external .gwt-PushButton;
+		@external .gwt-ToggleButton;
+		
+		.bottomPanel .gwt-PushButton, .bottomPanel .gwt-ToggleButton {
+			float: left;
+			font-size: 0.75em;
+			text-transform: uppercase;
+		}
+		
+		.bottomPanel .searchButton {
+			font-weight: bold;
+		}
+		
+		.optionsPanel {
+			width: 100%;
+		}
+		
+		@external .content;
+		
+		.optionsPanel .content {
+			border: solid 3px #E8EEF7;
+			margin: 0em;
+			padding: 1em 1em 1em 1em;
+		}
+		
+		.advancedSearchField {
+			width: 100%;
+		}
+		
+		.endPanel {
+			height: 20px;
+			clear: both;
+		}
+		
+	</ui:style>
+
+	<g:FlowPanel>
+
+		<g:DisclosurePanel ui:field="optionsPanel" addStyleNames="{style.optionsPanel}" animationEnabled="true">
+			<g:FlowPanel>
+			
+				<g:TextBox ui:field="advancedSearchField" addStyleNames="{style.advancedSearchField}"></g:TextBox>
+				
+				<g:ListBox ui:field="subjectsListBox" visibleItemCount="1">
+					<g:item>Any Subject</g:item>
+					<g:item value="CMPUT">Computing Science</g:item>
+				</g:ListBox>
+			
+			</g:FlowPanel>
+		</g:DisclosurePanel>
+
+		<g:FlowPanel addStyleNames="{style.bottomPanel}">
+			<g:TextBox ui:field="searchField" visibleLength="40">Search Courses</g:TextBox>
+			<g:PushButton ui:field="searchButton" addStyleNames="{style.searchButton}">Search</g:PushButton>
+			<g:ToggleButton ui:field="optionsButton">Options</g:ToggleButton>
+		</g:FlowPanel>
+		
+		<g:SimplePanel addStyleNames="endPanel" />
+
+	</g:FlowPanel>
+	
+</ui:UiBinder>

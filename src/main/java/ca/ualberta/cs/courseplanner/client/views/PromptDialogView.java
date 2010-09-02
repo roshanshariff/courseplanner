@@ -27,7 +27,7 @@ public class PromptDialogView {
 	
 	interface Binder extends UiBinder<DialogBox, PromptDialogView> { }
 	
-	private static final Binder binder = GWT.create(Binder.class);
+	private static final Binder BINDER = GWT.create(Binder.class);
 	
 	private Presenter presenter;
 	
@@ -39,7 +39,7 @@ public class PromptDialogView {
 	
 	
 	public PromptDialogView () {
-		binder.createAndBindUi(this);
+		BINDER.createAndBindUi(this);
 	}
 	
 	public void setPresenter (Presenter presenter) {
@@ -82,10 +82,10 @@ public class PromptDialogView {
 	@UiHandler("input")
 	void onInputKey (KeyUpEvent event) {
 		if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-			doSubmit();
+			submit.click();
 		}
 		else if (event.getNativeKeyCode() == KeyCodes.KEY_ESCAPE) {
-			doCancel();
+			cancel.click();
 		}
 	}
 	

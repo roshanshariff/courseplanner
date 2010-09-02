@@ -3,8 +3,11 @@
 <module rename-to="courseplanner">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.user.theme.standard.Standard" />
-	<source path="client" />
+  	<inherits name='com.google.gwt.app.App' />
+ 	<inherits name='com.google.gwt.user.cellview.CellView'/>
+   	<source path="client" />
 	<source path="services" />
 	<source path="model" />
+	<source path="util" />
 	<entry-point class="ca.ualberta.cs.courseplanner.client.CoursePlanner" />
 </module>

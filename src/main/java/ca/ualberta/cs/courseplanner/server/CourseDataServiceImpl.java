@@ -1,6 +1,8 @@
 package ca.ualberta.cs.courseplanner.server;
 
 import org.dozer.Mapper;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.model.*;
@@ -9,12 +11,18 @@ import ca.ualberta.cs.courseplanner.services.CourseDataService;
 
 public class CourseDataServiceImpl implements CourseDataService {
 
-	private DataRepository data;
+	private DataRepository dataRepository;
+	
+	private SearchEngine searchEngine;
 	
 	private Mapper mapper;
 	
-	public void setData (DataRepository data) {
-		this.data = data;
+	public void setDataRepository (DataRepository data) {
+		this.dataRepository = data;
+	}
+	
+	public void setSearchEngine (SearchEngine searchEngine) {
+		this.searchEngine = searchEngine;
 	}
 	
 	public void setMapper (Mapper mapper) {
@@ -24,7 +32,13 @@ public class CourseDataServiceImpl implements CourseDataService {
 	@Override
 	@Transactional(readOnly=true)
 	public CourseDetails getCourseDetails (Long id) {
-		return mapper.map(data.getCourse(id), CourseDetails.class);
+		return mapper.map(dataRepository.getCourse(id), CourseDetails.class);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public CourseSearchResults searchCourses (String queryString, int firstResult, int maxResults) {
+		return searchEngine.searchCourses(queryString, firstResult, maxResults);
 	}
 
 }

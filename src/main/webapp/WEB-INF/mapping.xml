@@ -10,14 +10,6 @@
 			<a>subject.id</a>
 			<b>subjectId</b>
 		</field>
-		<field>
-			<a>org1.id</a>
-			<b>org1Id</b>
-		</field>
-		<field>
-			<a>org2.id</a>
-			<b>org2Id</b>
-		</field>
 	</mapping>
 
 	<mapping type="one-way">
@@ -28,8 +20,16 @@
 			<b>subjectName</b>
 		</field>
 		<field>
+			<a>org1.id</a>
+			<b>org1Id</b>
+		</field>
+		<field>
 			<a>org1.name</a>
 			<b>org1Name</b>
+		</field>
+		<field>
+			<a>org2.id</a>
+			<b>org2Id</b>
 		</field>
 		<field>
 			<a>org2.name</a>

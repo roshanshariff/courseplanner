@@ -1,7 +1,4 @@
-package ca.ualberta.cs.courseplanner.utils;
-
-import java.io.File;
-import java.util.Arrays;
+package ca.ualberta.cs.courseplanner.tools;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

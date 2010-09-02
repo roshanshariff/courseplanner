@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:cell='urn:import:com.google.gwt.user.cellview.client'
 	xmlns:view='urn:import:ca.ualberta.cs.courseplanner.client.views'>
 
 	<ui:style>
@@ -36,13 +37,8 @@
 			margin-left: 15em;
 		}
 		
-		.searchBox {
-			text-align: right;
-			padding: 0.5em;
-		}
-		
-		.searchBox a {
-			padding: 0.5em;
+		.searchCoursesView {
+			padding: 0.5em 1em;
 		}
 		
 		.contentPanel {
@@ -55,26 +51,32 @@
 			padding: 3em;
 		}
 		
+		.table {
+			width: 100%;
+		}
+		
 	</ui:style>
 
 	<g:FlowPanel>
 
 		<g:FlowPanel addStyleNames="{style.navBar}">
 
-			<g:InlineHTML addStyleNames="{style.navBarItem}">
+			<g:HTML addStyleNames="{style.navBarItem}">
 				<b>rshariff@ualberta.ca</b>
 				<br />
 				<a href="javascript:">Sign out</a>
 				|
 				<a href="javascript:">Settings</a>
-			</g:InlineHTML>
+			</g:HTML>
 
-			<g:Anchor addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">My Transcript</g:Anchor>
+			<g:Anchor ui:field="searchCoursesLink" addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">Find Courses...</g:Anchor>
+
+			<g:Anchor ui:field="myTranscriptLink" addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">My Transcript</g:Anchor>
 
 			<g:Anchor ui:field="createPlanLink" addStyleNames="{style.navBarItem}, {style.navBarNewItem}" href="javascript:">Create Plan...</g:Anchor>
 
 			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Plans</g:Label>
-			<g:FlowPanel ui:field='planList' addStyleNames="{style.navBarItem}" />
+			<view:PlanList ui:field="planList" addStyleNames="{style.navBarItem}" />
 
 			<g:Label addStyleNames="{style.navBarHeader}, {style.navBarNewItem}">My Saved Searches</g:Label>
 			<g:FlowPanel ui:field='searchList' addStyleNames="{style.navBarItem}" />
@@ -82,16 +84,20 @@
 		</g:FlowPanel>
 
 		<g:FlowPanel addStyleNames="{style.mainPanel}">
+
 			<g:FlowPanel>
-				<g:FlowPanel addStyleNames="{style.searchBox}">
-					<g:TextBox visibleLength="50">Search Courses</g:TextBox>
-					<g:Button>Search</g:Button>
-					<g:InlineHyperlink>Search options &#0187;</g:InlineHyperlink>
-				</g:FlowPanel>
-				<g:FlowPanel ui:field="content" addStyleNames="{style.contentPanel}">
-					<g:Label>Rest of content.</g:Label>
-				</g:FlowPanel>
+
+				<view:SearchCoursesView ui:field="searchCoursesView"  addStyleNames="{style.searchCoursesView}"/>
+
+				<view:SimplePanelActivityDisplay ui:field="content" addStyleNames="{style.contentPanel}">
+				
+					<cell:CellList ui:field="table" addStyleNames="{style.table}">
+					</cell:CellList>
+					
+				</view:SimplePanelActivityDisplay>
+
 			</g:FlowPanel>
+
 		</g:FlowPanel>
 
 		<g:HTML addStyleNames="{style.footer}">

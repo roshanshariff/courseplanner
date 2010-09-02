@@ -8,9 +8,11 @@ public class CourseDetails extends CourseInfo implements java.io.Serializable {
 	
 	private String subjectName;
 
-	private String org1Name;
-	private String org2Name;
+	private String org1Id, org1Name;
+	private String org2Id, org2Name;
 
+	private Career career;
+	
 	private String description;
 
 	
@@ -25,6 +27,18 @@ public class CourseDetails extends CourseInfo implements java.io.Serializable {
 	public String getOrg2Name () { return org2Name; }
 
 	public void setOrg2Name (String org2Name) { this.org2Name = org2Name; }
+	
+	public String getOrg1Id () { return org1Id; }
+
+	public void setOrg1Id (String org1Id) { this.org1Id = org1Id; }
+
+	public String getOrg2Id () { return org2Id; }
+
+	public void setOrg2Id (String org2Id) {	this.org2Id = org2Id; }
+	
+	public Career getCareer () { return career; }
+
+	public void setCareer (Career career) { this.career = career; }
 	
 	public String getDescription () { return description; }
 	

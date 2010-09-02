@@ -11,12 +11,17 @@ public class CourseInfo implements java.io.Serializable {
 	private String subjectId;
 	private String number;
 	
-	private String title;
+	private String name;
 	
-	private String org1Id;
-	private String org2Id;
 	
-	private Career career;
+	public CourseInfo () { }
+	
+	public CourseInfo (long id, String subjectId, String number, String title) {
+		this.id = id;
+		this.subjectId = subjectId;
+		this.number = number;
+		this.name = title;
+	}
 	
 	
 	public long getId () { return id; }
@@ -31,20 +36,8 @@ public class CourseInfo implements java.io.Serializable {
 
 	public void setNumber (String number) { this.number = number; }
 	
-	public String getTitle () { return title; }
+	public String getName () { return name; }
 
-	public void setTitle (String title) { this.title = title; }
-	
-	public String getOrg1Id () { return org1Id; }
-
-	public void setOrg1Id (String org1Id) { this.org1Id = org1Id; }
-
-	public String getOrg2Id () { return org2Id; }
-
-	public void setOrg2Id (String org2Id) {	this.org2Id = org2Id; }
-	
-	public Career getCareer () { return career; }
-
-	public void setCareer (Career career) { this.career = career; }
+	public void setName (String name) { this.name = name; }
 	
 }

@@ -60,7 +60,7 @@ public class MainPresenter implements Presenter, ValueChangeHandler<String> {
 									""
 									+ result.getSubjectId() + " "
 									+ result.getNumber() + " "
-									+ result.getTitle() + "<br>"
+									+ result.getName() + "<br>"
 									+ "<i>" + result.getOrg1Name() + "</i><br/>"
 									+ "<i>" + result.getOrg2Name() + "</i><br/>"
 									+ "<p>" + result.getDescription() + "</p>"

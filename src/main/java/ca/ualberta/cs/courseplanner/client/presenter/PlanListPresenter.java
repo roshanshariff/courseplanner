@@ -1,16 +1,20 @@
 package ca.ualberta.cs.courseplanner.client.presenter;
 
 
+import java.util.Arrays;
+
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.view.client.AbstractDataProvider;
+import com.google.gwt.view.client.HasData;
 
 import ca.ualberta.cs.courseplanner.client.events.PlanListChangedEvent;
 import ca.ualberta.cs.courseplanner.client.plans.PlanManager;
 import ca.ualberta.cs.courseplanner.model.PlanInfo;
 
 
-public class PlanListPresenter implements PlanListChangedEvent.Handler {
+public class PlanListPresenter extends AbstractDataProvider<PlanInfo> implements PlanListChangedEvent.Handler {
 	
 	private PlanInfo[] plans;
 	
@@ -18,15 +22,9 @@ public class PlanListPresenter implements PlanListChangedEvent.Handler {
 	
 	private final HandlerManager eventBus;
 	
-	private HasWidgets container;
-	
 	public PlanListPresenter (PlanManager planManager, HandlerManager eventBus) {
 		this.planManager = planManager;
 		this.eventBus = eventBus;
-	}
-	
-	public void setContainer (HasWidgets container) {
-		this.container = container;
 	}
 	
 	public void start () {
@@ -36,7 +34,6 @@ public class PlanListPresenter implements PlanListChangedEvent.Handler {
 	
 	public void stop () {
 		eventBus.removeHandler(PlanListChangedEvent.TYPE, this);
-		container.clear();
 	}
 
 	@Override
@@ -45,11 +42,16 @@ public class PlanListPresenter implements PlanListChangedEvent.Handler {
 		update();
 	}
 	
+	@Override
+	protected void onRangeChanged (HasData<PlanInfo> arg0) {
+		update();
+	}
+
 	private void update () {
-		container.clear();
-		for (PlanInfo plan : plans) {
-			container.add(new Hyperlink(plan.getName(), false, "plan:"+plan.getId()));
-		}		
+		if (plans != null) {
+			updateRowCount(plans.length, true);
+			updateRowData(0, Arrays.asList(plans));
+		}
 	}
 
 }

@@ -2,12 +2,23 @@ package ca.ualberta.cs.courseplanner.entities;
 
 import javax.persistence.*;
 import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Parameter;
+import org.hibernate.search.cfg.ConcatStringBridge;
 
 import ca.ualberta.cs.courseplanner.model.Career;
+import ca.ualberta.cs.courseplanner.server.search.CourseBridge;
+import ca.ualberta.cs.courseplanner.server.search.CourseOrgBridge;
+import ca.ualberta.cs.courseplanner.server.search.CourseOrgIdBridge;
+import ca.ualberta.cs.courseplanner.server.search.ObjectToStringBridge;
 
 @Entity
 @Table(name="courses")
 @Indexed
+@ClassBridges({
+	@ClassBridge(name="all", index=Index.TOKENIZED, store=Store.NO, impl=CourseBridge.class),
+	@ClassBridge(name="org", index=Index.TOKENIZED, store=Store.NO, impl=CourseOrgBridge.class),
+	@ClassBridge(name="org.id", index=Index.UN_TOKENIZED, store=Store.NO, impl=CourseOrgIdBridge.class)
+})
 public class Course implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1759624274109532278L;
@@ -17,7 +28,7 @@ public class Course implements java.io.Serializable {
 	private Subject subject;
 	private String number;
 	
-	private String title;
+	private String name;
 	
 	private Organisation org1;
 	private Organisation org2;
@@ -34,21 +45,27 @@ public class Course implements java.io.Serializable {
 
 	@ManyToOne
 	@IndexedEmbedded
+	@Field(store=Store.NO, index=Index.TOKENIZED, bridge=@FieldBridge(impl=ObjectToStringBridge.class))
 	public Subject getSubject () { return subject; }
 
 	public void setSubject (Subject subject) { this.subject = subject; }
 	
 	@Column(length=4)
-	@Field(index=Index.UN_TOKENIZED, store=Store.YES)
+	@Fields({
+		@Field(index=Index.UN_TOKENIZED, store=Store.YES),
+		@Field(name="level", index=Index.UN_TOKENIZED,
+				bridge=@FieldBridge(impl=ConcatStringBridge.class,
+									params=@Parameter(name="size", value="1")))
+	})
 	public String getNumber () { return number; }
 	
 	public void setNumber (String number) { this.number = number; }
 	
 	@Column(length=200)
 	@Field(index=Index.TOKENIZED, store=Store.YES)
-	public String getTitle () { return title; }
+	public String getName () { return name; }
 	
-	public void setTitle (String title) { this.title = title; }
+	public void setName (String name) { this.name = name; }
 
 	@ManyToOne
 	@IndexedEmbedded
