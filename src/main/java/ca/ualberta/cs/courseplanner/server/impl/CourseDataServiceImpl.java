@@ -1,34 +1,36 @@
-package ca.ualberta.cs.courseplanner.server;
+package ca.ualberta.cs.courseplanner.server.impl;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.dozer.Mapper;
-import org.hibernate.search.FullTextSession;
-import org.hibernate.search.Search;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.model.*;
+import ca.ualberta.cs.courseplanner.server.services.DataRepository;
+import ca.ualberta.cs.courseplanner.server.services.SearchEngine;
 import ca.ualberta.cs.courseplanner.services.CourseDataService;
 
-
+@Service
+@Singleton
 public class CourseDataServiceImpl implements CourseDataService {
 
-	private DataRepository dataRepository;
+	private final DataRepository dataRepository;
 	
-	private SearchEngine searchEngine;
+	private final SearchEngine searchEngine;
 	
-	private Mapper mapper;
+	private final Mapper mapper;
 	
-	public void setDataRepository (DataRepository dataRepository) {
+
+	@Inject
+	public CourseDataServiceImpl (DataRepository dataRepository, SearchEngine searchEngine, Mapper mapper) {
 		this.dataRepository = dataRepository;
-	}
-	
-	public void setSearchEngine (SearchEngine searchEngine) {
 		this.searchEngine = searchEngine;
-	}
-	
-	public void setMapper (Mapper mapper) {
 		this.mapper = mapper;
 	}
 
+	
 	@Override
 	@Transactional(readOnly=true)
 	public CourseDetails getCourseDetails (Long id) {
@@ -36,7 +38,6 @@ public class CourseDataServiceImpl implements CourseDataService {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
 	public CourseSearchResults searchCourses (String queryString, int firstResult, int maxResults) {
 		return searchEngine.searchCourses(queryString, firstResult, maxResults);
 	}

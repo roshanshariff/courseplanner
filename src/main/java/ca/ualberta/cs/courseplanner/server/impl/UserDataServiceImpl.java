@@ -1,47 +1,53 @@
-package ca.ualberta.cs.courseplanner.server;
+package ca.ualberta.cs.courseplanner.server.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+import javax.inject.Singleton;
+
 import org.dozer.Mapper;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.entities.Course;
 import ca.ualberta.cs.courseplanner.entities.Plan;
 import ca.ualberta.cs.courseplanner.entities.User;
 import ca.ualberta.cs.courseplanner.model.*;
+import ca.ualberta.cs.courseplanner.server.services.DataRepository;
+import ca.ualberta.cs.courseplanner.server.services.UserIdProvider;
 import ca.ualberta.cs.courseplanner.services.UserDataService;
 
 
+@Service
+@Singleton
 public class UserDataServiceImpl implements UserDataService {
 
-	private DataRepository dataRepository;
+	private final DataRepository dataRepository;
 	
-	private Mapper mapper;
+	private final Mapper mapper;
 	
-	private UserIdProvider userIdProvider;
+	private final UserIdProvider currentUserId;
 	
-	public void setDataRepository (DataRepository dataRepository) {
+	private final Provider<User> currentUser;
+	
+	
+	@Inject
+	public UserDataServiceImpl (DataRepository dataRepository, Mapper mapper,
+			UserIdProvider currentUserId) {
 		this.dataRepository = dataRepository;
-	}
-	
-	public void setMapper (Mapper mapper) {
 		this.mapper = mapper;
+		this.currentUserId = currentUserId;
+		this.currentUser = new CurrentUserProvider(currentUserId, dataRepository);
 	}
-	
-	public void setUserIdProvider (UserIdProvider user) {
-		this.userIdProvider = user;
-	}
-	
-	private User getCurrentUser () {
-		return dataRepository.getUser(userIdProvider.getUserId());
-	}
+
 	
 	private Plan getPlan (Long planId) {
 		Plan plan = dataRepository.getPlan(planId);
-		if (plan.getUser().getId().equals(userIdProvider.getUserId())) {
+		if (plan.getUser().getId().equals(currentUserId.getUserId())) {
 			throw new IllegalArgumentException ("Invalid plan identifier.");
 		}
 		return plan;
@@ -50,14 +56,14 @@ public class UserDataServiceImpl implements UserDataService {
 	@Override
 	@Transactional
 	public PlanInfo createPlan(String planName) {
-		return mapper.map(dataRepository.createPlan(getCurrentUser(), planName), PlanInfo.class);
+		return mapper.map(dataRepository.createPlan(currentUser.get(), planName), PlanInfo.class);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public PlanInfo[] getPlans () {
 		List<PlanInfo> plans = new ArrayList<PlanInfo>();
-		for (Plan plan : dataRepository.getUserPlans(userIdProvider.getUserId())) {
+		for (Plan plan : dataRepository.getUserPlans(currentUserId.getUserId())) {
 			plans.add(mapper.map(plan, PlanInfo.class));
 		}
 		return plans.toArray(new PlanInfo[plans.size()]);

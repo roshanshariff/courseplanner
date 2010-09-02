@@ -16,13 +16,11 @@
 
 
 	<bean id="courseDataServlet" name="/services/coursedata"
-		class="ca.ualberta.cs.courseplanner.server.CourseDataServlet">
-		<property name="service" ref="courseDataService" />
-	</bean>
+	class="ca.ualberta.cs.courseplanner.server.servlets.CourseDataServlet"
+	autowire="constructor" />
 
 	<bean id="userDataServlet" name="/services/userdata"
-		class="ca.ualberta.cs.courseplanner.server.UserDataServlet">
-		<property name="service" ref="userDataService" />
-	</bean>
+	class="ca.ualberta.cs.courseplanner.server.servlets.UserDataServlet"
+	autowire="constructor" />
 
 </beans>

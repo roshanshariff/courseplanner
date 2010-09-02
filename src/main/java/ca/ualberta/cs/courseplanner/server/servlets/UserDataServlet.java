@@ -1,4 +1,4 @@
-package ca.ualberta.cs.courseplanner.server;
+package ca.ualberta.cs.courseplanner.server.servlets;
 
 import java.util.Map;
 
@@ -14,12 +14,12 @@ public class UserDataServlet extends RemoteServiceServlet implements UserDataSer
 	
 	private static final long serialVersionUID = -987127814153552667L;
 
-	private UserDataService service;
+	private final UserDataService service;
 	
-	public void setService (UserDataService service) {
+	public UserDataServlet (UserDataService service) {
 		this.service = service;
 	}
-
+	
 	@Override
 	public PlanInfo createPlan (String planName) {
 		return service.createPlan(planName);

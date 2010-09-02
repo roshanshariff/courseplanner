@@ -1,42 +1,48 @@
-package ca.ualberta.cs.courseplanner.server;
+package ca.ualberta.cs.courseplanner.server.impl;
 
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+import javax.inject.Singleton;
 
 import org.apache.lucene.queryParser.core.QueryNodeException;
 import org.apache.lucene.queryParser.standard.StandardQueryParser;
 import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextQuery;
 import org.hibernate.search.FullTextSession;
-import org.hibernate.search.Search;
 import org.hibernate.transform.ResultTransformer;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.entities.Course;
 import ca.ualberta.cs.courseplanner.model.CourseInfo;
 import ca.ualberta.cs.courseplanner.model.CourseSearchResults;
 import ca.ualberta.cs.courseplanner.server.search.CourseInfoResultTransformer;
+import ca.ualberta.cs.courseplanner.server.services.SearchEngine;
 
 
+@Repository
+@Singleton
 public class SearchEngineImpl implements SearchEngine {
 	
-	private SessionFactory sessionFactory;
+	private final Provider<FullTextSession> fullTextSession;
 	
 	private final ResultTransformer courseInfoResultTransformer = new CourseInfoResultTransformer();
 	
-	public void setSessionFactory (SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+
+	@Inject
+	public SearchEngineImpl (SessionFactory sessionFactory) {
+		this.fullTextSession = new CurrentFullTextSessionProvider(new CurrentSessionProvider(sessionFactory));
 	}
-	
-	private FullTextSession getSession () {
-		return Search.getFullTextSession(sessionFactory.getCurrentSession());
-	}
+
 
 	@Override
 	@Transactional(readOnly=true)
 	public CourseSearchResults searchCourses (String queryString, int firstResult, int maxResults) {
 		try {
 			
-			FullTextSession session = getSession();
+			FullTextSession session = fullTextSession.get();
 
 			StandardQueryParser queryParser = new StandardQueryParser();
 			queryParser.setAnalyzer(session.getSearchFactory().getAnalyzer(Course.class));

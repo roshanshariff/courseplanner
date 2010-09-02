@@ -1,4 +1,4 @@
-package ca.ualberta.cs.courseplanner.server;
+package ca.ualberta.cs.courseplanner.server.servlets;
 
 import ca.ualberta.cs.courseplanner.model.CourseDetails;
 import ca.ualberta.cs.courseplanner.model.CourseInfo;
@@ -11,12 +11,12 @@ public class CourseDataServlet extends RemoteServiceServlet implements CourseDat
 	
 	private static final long serialVersionUID = -3955349790234109774L;
 
-	private CourseDataService service;
+	private final CourseDataService service;
 	
-	public void setService (CourseDataService service) {
+	public CourseDataServlet (CourseDataService service) {
 		this.service = service;
 	}
-
+	
 	@Override
 	public CourseDetails getCourseDetails (Long id) {
 		return service.getCourseDetails(id);

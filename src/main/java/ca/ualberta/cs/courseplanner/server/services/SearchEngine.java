@@ -1,4 +1,4 @@
-package ca.ualberta.cs.courseplanner.server;
+package ca.ualberta.cs.courseplanner.server.services;
 
 import ca.ualberta.cs.courseplanner.model.CourseSearchResults;
 
