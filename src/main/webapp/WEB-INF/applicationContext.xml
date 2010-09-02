@@ -57,15 +57,20 @@
 	<bean id="dataRepository" class="ca.ualberta.cs.courseplanner.server.DataRepositoryImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="searchEngine" class="ca.ualberta.cs.courseplanner.server.SearchEngineImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<bean id="courseDataService"
 		class="ca.ualberta.cs.courseplanner.server.CourseDataServiceImpl">
-		<property name="data" ref="dataRepository" />
+		<property name="dataRepository" ref="dataRepository" />
+		<property name="searchEngine" ref="searchEngine" />
 		<property name="mapper" ref="mapper" />
 	</bean>
 
 	<bean id="userDataService" class="ca.ualberta.cs.courseplanner.server.UserDataServiceImpl">
-		<property name="data" ref="dataRepository" />
+		<property name="dataRepository" ref="dataRepository" />
 		<property name="mapper" ref="mapper" />
 		<property name="userIdProvider">
 			<bean class="ca.ualberta.cs.courseplanner.server.UserIdProviderMockImpl">

@@ -2,29 +2,18 @@ package ca.ualberta.cs.courseplanner.server;
 
 import java.util.List;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.queryParser.MultiFieldQueryParser;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.queryParser.core.QueryNodeException;
 import org.apache.lucene.queryParser.standard.StandardQueryParser;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.Query;
-import org.dozer.Mapper;
 import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextQuery;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
-import org.hibernate.transform.AliasToBeanResultTransformer;
-import org.hibernate.transform.BasicTransformerAdapter;
 import org.hibernate.transform.ResultTransformer;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.entities.Course;
 import ca.ualberta.cs.courseplanner.model.CourseInfo;
 import ca.ualberta.cs.courseplanner.model.CourseSearchResults;
-import ca.ualberta.cs.courseplanner.model.SearchResults;
 import ca.ualberta.cs.courseplanner.server.search.CourseInfoResultTransformer;
 
 

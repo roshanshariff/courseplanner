@@ -17,8 +17,8 @@ public class CourseDataServiceImpl implements CourseDataService {
 	
 	private Mapper mapper;
 	
-	public void setDataRepository (DataRepository data) {
-		this.dataRepository = data;
+	public void setDataRepository (DataRepository dataRepository) {
+		this.dataRepository = dataRepository;
 	}
 	
 	public void setSearchEngine (SearchEngine searchEngine) {

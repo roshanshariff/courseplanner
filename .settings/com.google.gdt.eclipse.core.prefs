@@ -1,6 +1,6 @@
-#Sun Aug 01 10:17:12 MDT 2010
+#Thu Sep 02 10:42:15 MDT 2010
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
-lastWarOutDir=/Users/roshan/Documents/workspace/courseplanner/src/main/webapp
-warSrcDir=src/main/webapp
-warSrcDirIsOutput=true
+lastWarOutDir=/Users/roshan/Documents/workspace/courseplanner/target/courseplanner
+warSrcDir=target/courseplanner
+warSrcDirIsOutput=false

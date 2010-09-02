@@ -17,14 +17,14 @@ import ca.ualberta.cs.courseplanner.services.UserDataService;
 
 public class UserDataServiceImpl implements UserDataService {
 
-	private DataRepository data;
+	private DataRepository dataRepository;
 	
 	private Mapper mapper;
 	
 	private UserIdProvider userIdProvider;
 	
-	public void setData (DataRepository data) {
-		this.data = data;
+	public void setDataRepository (DataRepository dataRepository) {
+		this.dataRepository = dataRepository;
 	}
 	
 	public void setMapper (Mapper mapper) {
@@ -36,11 +36,11 @@ public class UserDataServiceImpl implements UserDataService {
 	}
 	
 	private User getCurrentUser () {
-		return data.getUser(userIdProvider.getUserId());
+		return dataRepository.getUser(userIdProvider.getUserId());
 	}
 	
 	private Plan getPlan (Long planId) {
-		Plan plan = data.getPlan(planId);
+		Plan plan = dataRepository.getPlan(planId);
 		if (plan.getUser().getId().equals(userIdProvider.getUserId())) {
 			throw new IllegalArgumentException ("Invalid plan identifier.");
 		}
@@ -50,14 +50,14 @@ public class UserDataServiceImpl implements UserDataService {
 	@Override
 	@Transactional
 	public PlanInfo createPlan(String planName) {
-		return mapper.map(data.createPlan(getCurrentUser(), planName), PlanInfo.class);
+		return mapper.map(dataRepository.createPlan(getCurrentUser(), planName), PlanInfo.class);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public PlanInfo[] getPlans () {
 		List<PlanInfo> plans = new ArrayList<PlanInfo>();
-		for (Plan plan : data.getUserPlans(userIdProvider.getUserId())) {
+		for (Plan plan : dataRepository.getUserPlans(userIdProvider.getUserId())) {
 			plans.add(mapper.map(plan, PlanInfo.class));
 		}
 		return plans.toArray(new PlanInfo[plans.size()]);
@@ -72,7 +72,7 @@ public class UserDataServiceImpl implements UserDataService {
 	@Override
 	@Transactional
 	public void deletePlan(long planId) {
-		data.deletePlan(getPlan(planId));
+		dataRepository.deletePlan(getPlan(planId));
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class UserDataServiceImpl implements UserDataService {
 	@Override
 	@Transactional
 	public void addPlanCourse(long planId, long courseId, CoursePlanInfo info) {
-		getPlan(planId).getCourses().put(data.getCourse(courseId), info);
+		getPlan(planId).getCourses().put(dataRepository.getCourse(courseId), info);
 	}
 
 	@Override
@@ -98,14 +98,14 @@ public class UserDataServiceImpl implements UserDataService {
 	public void addPlanCourses (long planId, long[] courseIds) {
 		Map<Course, CoursePlanInfo> planCourses = getPlan(planId).getCourses();
 		for (long courseId : courseIds) {
-			planCourses.put(data.getCourse(courseId), new CoursePlanInfo());
+			planCourses.put(dataRepository.getCourse(courseId), new CoursePlanInfo());
 		}
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public CoursePlanInfo getPlanCourse(long planId, long courseId) {
-		return getPlan(planId).getCourses().get(data.getCourse(courseId));
+		return getPlan(planId).getCourses().get(dataRepository.getCourse(courseId));
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class UserDataServiceImpl implements UserDataService {
 	@Override
 	@Transactional
 	public void removePlanCourse(long planId, long courseId) {
-		getPlan(planId).getCourses().remove(data.getCourse(courseId));
+		getPlan(planId).getCourses().remove(dataRepository.getCourse(courseId));
 	}
 
 }
