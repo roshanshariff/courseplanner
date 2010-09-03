@@ -1,7 +1,7 @@
 package ca.ualberta.cs.courseplanner.client.views;
 
 import ca.ualberta.cs.courseplanner.model.PlanInfo;
-import ca.ualberta.cs.courseplanner.util.TextUtils;
+import ca.ualberta.cs.courseplanner.util.EscapeUtils;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.Cell;
@@ -17,7 +17,7 @@ public class PlanList extends CellList<PlanInfo> {
 			html.append("<a href=\"#p:")
 				.append(plan.getId())
 				.append("\">")
-				.append(TextUtils.escapeText(plan.getName()))
+				.append(EscapeUtils.escapeHtml(plan.getName()))
 				.append("</a>");
 		}
 		

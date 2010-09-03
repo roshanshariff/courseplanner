@@ -5,10 +5,11 @@ import java.util.Map;
 import javax.persistence.*;
 
 import ca.ualberta.cs.courseplanner.model.CoursePlanInfo;
+import ca.ualberta.cs.courseplanner.model.SearchOrdering;
 
 @Entity
-@Table(name="plans")
-public class Plan {
+@Table(name="searches")
+public class SavedSearch {
 	
 	private Long id;
 	
@@ -20,7 +21,9 @@ public class Plan {
 	
 	private boolean publicReadable;
 	
-	private Map<Course, CoursePlanInfo> courses;
+	private String query;
+	
+	private SearchOrdering ordering;
 	
 	@Id
 	@GeneratedValue
@@ -48,10 +51,14 @@ public class Plan {
 	
 	public void setPublic (boolean publicReadable) { this.publicReadable = publicReadable; }
 
-	@ElementCollection
-	@CollectionTable(name="plan_courses")
-	public Map<Course, CoursePlanInfo> getCourses() { return courses; }
-
-	public void setCourses(Map<Course, CoursePlanInfo> courses) { this.courses = courses; }
-
+	public String getQuery () { return query; }
+	
+	public void setQuery (String query) { this.query = query; }
+	
+	@Enumerated(EnumType.STRING)
+	@Column(length=8)
+	public SearchOrdering getOrdering () { return ordering; }
+	
+	public void setOrdering (SearchOrdering ordering) { this.ordering = ordering; }
+	
 }
