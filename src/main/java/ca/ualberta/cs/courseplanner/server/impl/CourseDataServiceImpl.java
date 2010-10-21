@@ -1,6 +1,7 @@
 package ca.ualberta.cs.courseplanner.server.impl;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import org.dozer.Mapper;
@@ -14,6 +15,7 @@ import ca.ualberta.cs.courseplanner.services.CourseDataService;
 
 @Service
 @Singleton
+@Named("courseDataService")
 public class CourseDataServiceImpl implements CourseDataService {
 
 	private final DataRepository dataRepository;
@@ -38,8 +40,9 @@ public class CourseDataServiceImpl implements CourseDataService {
 	}
 
 	@Override
-	public CourseSearchResults searchCourses (String queryString, int firstResult, int maxResults) {
-		return searchEngine.searchCourses(queryString, firstResult, maxResults);
+	public SearchResults searchCourses (String queryString, SearchOrdering ordering, int firstResult, int maxResults) {
+		if (ordering == null) ordering = SearchOrdering.DEFAULT;
+		return searchEngine.searchCourses(queryString, ordering, firstResult, maxResults);
 	}
 
 }

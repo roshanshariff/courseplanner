@@ -1,30 +1,26 @@
 package ca.ualberta.cs.courseplanner.client;
 
 import ca.ualberta.cs.courseplanner.client.presenter.Presenter;
-import ca.ualberta.cs.courseplanner.entities.Course;
 import ca.ualberta.cs.courseplanner.model.CourseDetails;
 import ca.ualberta.cs.courseplanner.services.CourseDataServiceAsync;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 
 
 public class MainPresenter implements Presenter, ValueChangeHandler<String> {
 	
 	private CourseDataServiceAsync courseDataService;	
-	private HandlerManager eventBus;
+	private EventBus eventBus;
 	private HasWidgets container;
 	
-	public MainPresenter (CourseDataServiceAsync courseDataService, HandlerManager eventBus) {
+	public MainPresenter (CourseDataServiceAsync courseDataService, EventBus eventBus) {
 		this.courseDataService = courseDataService;
 		this.eventBus = eventBus;
 		bind();

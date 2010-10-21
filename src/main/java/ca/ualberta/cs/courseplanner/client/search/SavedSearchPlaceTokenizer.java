@@ -1,14 +1,15 @@
 package ca.ualberta.cs.courseplanner.client.search;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import com.google.gwt.place.shared.PlaceTokenizer;
+import com.google.gwt.place.shared.Prefix;
 
 import ca.ualberta.cs.courseplanner.model.CourseInfo;
 import ca.ualberta.cs.courseplanner.model.SavedSearchInfo;
 import ca.ualberta.cs.courseplanner.util.EscapeUtils;
 
-import com.google.gwt.app.place.PlaceTokenizer;
-import com.google.gwt.app.place.Prefix;
-import com.google.gwt.dev.util.collect.HashMap;
 
 @Prefix("searchid")
 public class SavedSearchPlaceTokenizer implements PlaceTokenizer<SavedSearchPlace> {

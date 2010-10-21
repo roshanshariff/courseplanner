@@ -3,11 +3,11 @@ package ca.ualberta.cs.courseplanner.server.impl;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +22,8 @@ public class DataRepositoryImpl implements DataRepository {
 	private final Provider<Session> session;
 	
 	@Inject
-	public DataRepositoryImpl (SessionFactory sessionFactory) {
-		this.session = new CurrentSessionProvider(sessionFactory);
+	public DataRepositoryImpl (@Named("hibernateSession") Provider<Session> session) {
+		this.session = session;
 	}
 	
 	@Override
@@ -87,6 +87,42 @@ public class DataRepositoryImpl implements DataRepository {
 	@Transactional
 	public void deletePlan (Plan plan) {
 		session.get().delete(plan);
+	}
+
+	@Override
+	@Transactional
+	public SavedSearch createSavedSearch (User user, String name, String query) {
+		SavedSearch search = new SavedSearch();
+		search.setUser(user);
+		search.setName(name);
+		search.setQuery(query);
+		session.get().save(search);
+		session.get().flush();
+		return search;
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public SavedSearch getSavedSearch (Long id) {
+		return (SavedSearch)session.get().load(SavedSearch.class, id);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<SavedSearch> getUserSavedSearches (String userId) {
+		@SuppressWarnings("unchecked")
+		List<SavedSearch> result = session.get()
+			.createCriteria(SavedSearch.class)
+			.createCriteria("user")
+				.add(Restrictions.idEq(userId))
+			.list();
+		return result;
+	}
+
+	@Override
+	@Transactional
+	public void deleteSavedSearch (SavedSearch search) {
+		session.get().delete(search);
 	}
 	
 }

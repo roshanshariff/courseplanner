@@ -54,8 +54,8 @@
 		<property name="mappingFiles" value="file:WEB-INF/mapping.xml" />
 	</bean>
 	
-	<bean id="mockUserProvider" class="ca.ualberta.cs.courseplanner.server.impl.UserIdProviderMockImpl">
+	<bean id="currentUserId" class="java.lang.String">
 		<constructor-arg value="testuser" />
 	</bean>
-
+	
 </beans>

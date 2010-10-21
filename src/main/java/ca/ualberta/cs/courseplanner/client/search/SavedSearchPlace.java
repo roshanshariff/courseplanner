@@ -1,9 +1,9 @@
 package ca.ualberta.cs.courseplanner.client.search;
 
+import com.google.gwt.place.shared.Place;
+
 import ca.ualberta.cs.courseplanner.model.CourseInfo;
 import ca.ualberta.cs.courseplanner.model.SavedSearchInfo;
-
-import com.google.gwt.app.place.Place;
 
 
 public class SavedSearchPlace extends Place {

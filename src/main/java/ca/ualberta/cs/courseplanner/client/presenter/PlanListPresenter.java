@@ -3,7 +3,8 @@ package ca.ualberta.cs.courseplanner.client.presenter;
 
 import java.util.Arrays;
 
-import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.ResettableEventBus;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.view.client.AbstractDataProvider;
@@ -20,11 +21,11 @@ public class PlanListPresenter extends AbstractDataProvider<PlanInfo> implements
 	
 	private final PlanManager planManager;
 	
-	private final HandlerManager eventBus;
+	private final ResettableEventBus eventBus;
 	
-	public PlanListPresenter (PlanManager planManager, HandlerManager eventBus) {
+	public PlanListPresenter (PlanManager planManager, EventBus eventBus) {
 		this.planManager = planManager;
-		this.eventBus = eventBus;
+		this.eventBus = new ResettableEventBus(eventBus);
 	}
 	
 	public void start () {
@@ -33,7 +34,7 @@ public class PlanListPresenter extends AbstractDataProvider<PlanInfo> implements
 	}
 	
 	public void stop () {
-		eventBus.removeHandler(PlanListChangedEvent.TYPE, this);
+		eventBus.removeHandlers();
 	}
 
 	@Override

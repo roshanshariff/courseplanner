@@ -1,8 +1,8 @@
 package ca.ualberta.cs.courseplanner.client.places;
 
-import com.google.gwt.app.place.Activity;
-import com.google.gwt.app.place.ActivityMapper;
-import com.google.gwt.app.place.Place;
+import com.google.gwt.activity.shared.Activity;
+import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.place.shared.Place;
 
 
 public class AppActivityMapper implements ActivityMapper, AppPlaceVisitor {

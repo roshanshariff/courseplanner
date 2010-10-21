@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import ca.ualberta.cs.courseplanner.client.events.PlanCreatedEvent;
 import ca.ualberta.cs.courseplanner.client.events.PlanListChangedEvent;
+import ca.ualberta.cs.courseplanner.model.PlanDetails;
 import ca.ualberta.cs.courseplanner.model.PlanInfo;
 import ca.ualberta.cs.courseplanner.services.UserDataServiceAsync;
 
@@ -20,11 +21,11 @@ public class PlanManagerImpl implements PlanManager {
 	
 	private final UserDataServiceAsync userDataService;
 	
-	private final HandlerManager eventBus;
+	private final EventBus eventBus;
 	
 	private List<PlanInfo> plans = new ArrayList<PlanInfo>();
 	
-	public PlanManagerImpl (UserDataServiceAsync userDataService, HandlerManager eventBus) {
+	public PlanManagerImpl (UserDataServiceAsync userDataService, EventBus eventBus) {
 		this.userDataService = userDataService;
 		this.eventBus = eventBus;
 	}
@@ -53,10 +54,10 @@ public class PlanManagerImpl implements PlanManager {
 
 	@Override
 	public void createPlan (String planName, final PlanCreatedEvent.Handler callback) {
-		userDataService.createPlan(planName, new AsyncCallback<PlanInfo>() {
+		userDataService.createPlan(planName, new AsyncCallback<PlanDetails>() {
 
 			@Override
-			public void onSuccess (final PlanInfo plan) {
+			public void onSuccess (final PlanDetails plan) {
 				callback.onPlanCreated(plan);
 				DeferredCommand.addCommand(new Command() {
 					@Override

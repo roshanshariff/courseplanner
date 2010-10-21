@@ -5,11 +5,14 @@ import java.util.List;
 import ca.ualberta.cs.courseplanner.entities.*;
 
 public interface DataRepository {
+
 	
 	public Course getCourse (Long id);
 	
+
 	public User getUser (String id);
 	
+
 	public Plan createPlan (User user, String name);
 	
 	public Plan getPlan (Long id);
@@ -17,6 +20,16 @@ public interface DataRepository {
 	public List<Plan> getUserPlans (String userId);
 	
 	public void deletePlan (Plan plan);
+	
+	
+	public SavedSearch createSavedSearch (User user, String name, String query);
+	
+	public SavedSearch getSavedSearch (Long id);
+	
+	public List<SavedSearch> getUserSavedSearches (String userId);
+	
+	public void deleteSavedSearch (SavedSearch search);
+	
 	
 	public List<Subject> getSubjects ();
 	

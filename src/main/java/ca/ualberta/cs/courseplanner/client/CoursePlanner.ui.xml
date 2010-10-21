@@ -6,8 +6,35 @@
 
 	<ui:style>
 	
-		.header {
-			
+		@external .buttonBar;
+		@external .spacer;
+		@external .rightJoin;
+		@external .leftJoin;
+		
+		.buttonBar {
+		}
+		
+		.buttonBar div {
+			float: left;
+			font-size: 75%;
+			text-transform: uppercase;
+		}
+		
+		.buttonBar .spacer {
+			margin-left: 0.5em;
+		}
+		
+		.buttonBar .rightJoin {
+			border-right: solid 1px light-gray;
+		}
+		
+		.buttonBar .leftJoin {
+			border-left: none;
+		}
+	
+		h1 {
+			font-size: 150%;
+			margin-bottom: 5px;
 		}
 		
 		.navBar {
@@ -89,12 +116,22 @@
 
 				<view:SearchCoursesView ui:field="searchCoursesView"  addStyleNames="{style.searchCoursesView}"/>
 
-				<view:SimplePanelActivityDisplay ui:field="content" addStyleNames="{style.contentPanel}">
+				<g:SimplePanel ui:field="content" addStyleNames="{style.contentPanel}">
 				
-					<cell:CellList ui:field="table" addStyleNames="{style.table}">
-					</cell:CellList>
+					<g:HTMLPanel>
 					
-				</view:SimplePanelActivityDisplay>
+						<h1>Search Results</h1>
+					
+						<div class="buttonBar">
+						<g:PushButton addStyleNames="rightJoin"><g:upFace>Add To <strong>Plan</strong> &#9660;</g:upFace></g:PushButton>
+						<g:PushButton addStyleNames="leftJoin"><g:upFace><strong>Transcript</strong></g:upFace></g:PushButton>
+						<g:PushButton addStyleNames="spacer">Save Search</g:PushButton>
+						<g:PushButton addStyleNames="spacer">Order By: Relevance &#9660;</g:PushButton>
+						</div>
+					
+					</g:HTMLPanel>
+				
+				</g:SimplePanel>
 
 			</g:FlowPanel>
 

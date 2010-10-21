@@ -1,15 +1,11 @@
 package ca.ualberta.cs.courseplanner.model;
 
-import java.util.List;
 
-
-public class CourseSearchResults implements java.io.Serializable {
+public class SearchResults implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 8316357816735031921L;
 	
 	
-	private String queryString;
-
 	private int firstResult;
 	
 	private int numResults;
@@ -17,16 +13,6 @@ public class CourseSearchResults implements java.io.Serializable {
 	private boolean numResultsExact;
 	
 	private CourseInfo[] results;
-
-	
-	public String getQueryString () {
-		return queryString;
-	}
-
-	
-	public void setQueryString (String queryString) {
-		this.queryString = queryString;
-	}
 
 	
 	public int getFirstResult () {

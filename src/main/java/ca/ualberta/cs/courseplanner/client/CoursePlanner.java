@@ -17,7 +17,6 @@ import ca.ualberta.cs.courseplanner.services.CourseDataServiceAsync;
 import ca.ualberta.cs.courseplanner.services.UserDataService;
 import ca.ualberta.cs.courseplanner.services.UserDataServiceAsync;
 
-import com.google.gwt.app.place.Activity;
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.core.client.EntryPoint;
@@ -25,7 +24,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -36,6 +36,7 @@ import com.google.gwt.user.cellview.client.IdentityColumn;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 
 public class CoursePlanner implements EntryPoint {
@@ -50,26 +51,9 @@ public class CoursePlanner implements EntryPoint {
 	
 	@UiField SearchCoursesPresenter.View searchCoursesView;
 	
-	@UiField Activity.Display content;
+	@UiField SimplePanel content;
 	
-	@UiField(provided=true) CellList<CourseInfo> table = new CellList<CourseInfo>(new AbstractCell<CourseInfo>(Collections.<String>emptySet()) {
-
-		@Override
-		public void render (CourseInfo course, Object key, StringBuilder arg2) {
-			arg2.append("<a href=\"#c:")
-				.append(course.getId())
-				.append("\"><b>")
-				.append(course.getSubjectId())
-				.append(" ")
-				.append(course.getNumber())
-				.append("</b> ")
-				.append(course.getName())
-				.append("</a>");
-		}
-		
-	});
-	
-	private final HandlerManager eventBus = new HandlerManager(null);
+	private final EventBus eventBus = new SimpleEventBus();
 	
 	private final CourseDataServiceAsync courseDataService =
 		(CourseDataServiceAsync) GWT.create(CourseDataService.class);
@@ -97,13 +81,6 @@ public class CoursePlanner implements EntryPoint {
 		
 		searchCoursesPresenter.setView(searchCoursesView);
 		searchCoursesPresenter.start();
-		
-		table.setRowCount(2);
-		
-		table.setRowData(0, Arrays.asList(
-				new CourseInfo(1, "ACCTG", "300", "Introduction to Accounting"),
-				new CourseInfo(1, "CMPUT", "114", "Introduction to Computing Science")
-		));
 		
 	}
 	

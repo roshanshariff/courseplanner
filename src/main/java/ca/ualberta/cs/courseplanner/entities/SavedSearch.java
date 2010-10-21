@@ -1,15 +1,12 @@
 package ca.ualberta.cs.courseplanner.entities;
 
-import java.util.Map;
-
 import javax.persistence.*;
 
-import ca.ualberta.cs.courseplanner.model.CoursePlanInfo;
 import ca.ualberta.cs.courseplanner.model.SearchOrdering;
 
 @Entity
 @Table(name="searches")
-public class SavedSearch {
+public class SavedSearch implements UserObject {
 	
 	private Long id;
 	

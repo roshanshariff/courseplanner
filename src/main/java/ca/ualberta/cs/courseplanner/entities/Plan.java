@@ -8,7 +8,7 @@ import ca.ualberta.cs.courseplanner.model.CoursePlanInfo;
 
 @Entity
 @Table(name="plans")
-public class Plan {
+public class Plan implements UserObject {
 	
 	private Long id;
 	

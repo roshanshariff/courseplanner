@@ -1,9 +1,8 @@
 package ca.ualberta.cs.courseplanner.util;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
-
-import com.google.gwt.dev.util.collect.HashMap;
 
 
 public class EscapeUtils {

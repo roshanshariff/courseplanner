@@ -1,6 +1,7 @@
 package ca.ualberta.cs.courseplanner.client.presenter;
 
-import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.ResettableEventBus;
 
 import ca.ualberta.cs.courseplanner.client.events.PlanCreatedEvent;
 import ca.ualberta.cs.courseplanner.client.events.PlanListChangedEvent;
@@ -26,16 +27,16 @@ public class PlanCreatePresenter implements PromptDialogView.Presenter, PlanList
 	
 	private final PlanManager planManager;
 	
-	private final HandlerManager eventBus;
+	private final ResettableEventBus eventBus;
 	
 	private CreatePlanIntent intent;
 	
 	private PlanInfo[] plans;
 	
-	public PlanCreatePresenter (PromptDialogView view, PlanManager planManager, HandlerManager eventBus) {
+	public PlanCreatePresenter (PromptDialogView view, PlanManager planManager, EventBus eventBus) {
 		this.view = view;
 		this.planManager = planManager;
-		this.eventBus = eventBus;
+		this.eventBus = new ResettableEventBus(eventBus);
 	}
 	
 	public void setIntent (CreatePlanIntent intent) {
@@ -55,7 +56,7 @@ public class PlanCreatePresenter implements PromptDialogView.Presenter, PlanList
 	public void stop () {
 		view.hide();
 		view.setPresenter(null);
-		eventBus.removeHandler(PlanListChangedEvent.TYPE, this);
+		eventBus.removeHandlers();
 	}
 
 	@Override

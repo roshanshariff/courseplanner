@@ -13,14 +13,13 @@
 	<bean id="simpleServletPostProcessor"
 		class="org.springframework.web.servlet.handler.SimpleServletPostProcessor">
 	</bean>
-
-
-	<bean id="courseDataServlet" name="/services/coursedata"
-	class="ca.ualberta.cs.courseplanner.server.servlets.CourseDataServlet"
-	autowire="constructor" />
-
-	<bean id="userDataServlet" name="/services/userdata"
-	class="ca.ualberta.cs.courseplanner.server.servlets.UserDataServlet"
-	autowire="constructor" />
+	
+	<bean name="/services/coursedata" class="com.google.gwt.rpc.server.RpcServlet">
+		<constructor-arg ref="courseDataService" />
+	</bean>
+	
+	<bean name="/services/userdata" class="com.google.gwt.rpc.server.RpcServlet">
+		<constructor-arg ref="userDataService" />
+	</bean>
 
 </beans>

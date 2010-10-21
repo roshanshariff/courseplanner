@@ -1,6 +1,6 @@
 package ca.ualberta.cs.courseplanner.client.plans;
 
-import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.EventBus;
 
 import ca.ualberta.cs.courseplanner.client.intents.CreatePlanIntent;
 import ca.ualberta.cs.courseplanner.client.presenter.PlanCreatePresenter;
@@ -10,9 +10,9 @@ public class PlanIntentHandler implements CreatePlanIntent.Handler {
 	
 	private final PlanManager planManager;
 	
-	private final HandlerManager eventBus;
+	private final EventBus eventBus;
 	
-	public PlanIntentHandler (PlanManager planManager, HandlerManager eventBus) {
+	public PlanIntentHandler (PlanManager planManager, EventBus eventBus) {
 		this.planManager = planManager;
 		this.eventBus = eventBus;
 	}

@@ -1,10 +1,11 @@
 package ca.ualberta.cs.courseplanner.server.services;
 
-import ca.ualberta.cs.courseplanner.model.CourseSearchResults;
+import ca.ualberta.cs.courseplanner.model.SearchResults;
+import ca.ualberta.cs.courseplanner.model.SearchOrdering;
 
 
 public interface SearchEngine {
 	
-	CourseSearchResults searchCourses (String query, int firstResult, int maxResults);
+	SearchResults searchCourses (String query, SearchOrdering ordering, int firstResult, int maxResults);
 
 }
