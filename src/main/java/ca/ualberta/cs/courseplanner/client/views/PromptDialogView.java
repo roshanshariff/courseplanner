@@ -4,18 +4,26 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Widget;
 
 
-public class PromptDialogView {
+public class PromptDialogView implements IsWidget, HasText, HasValue<String> {
 	
 	public static interface Presenter {
 		
@@ -37,7 +45,6 @@ public class PromptDialogView {
 	@UiField Button submit;
 	@UiField Button cancel;
 	
-	
 	public PromptDialogView () {
 		BINDER.createAndBindUi(this);
 	}
@@ -55,28 +62,20 @@ public class PromptDialogView {
 		dialog.hide();
 	}
 	
+	public String getCaption () {
+		return dialog.getText();
+	}
+	
 	public void setCaption (String text) {
 		dialog.setText(text);
 	}
 	
-	public void setPrompt (String text) {
-		prompt.setText(text);
+	public Button getSubmitButton () {
+		return submit;
 	}
 	
-	public void setSubmitText (String text) {
-		submit.setText(text);
-	}
-	
-	public void setCancelText (String text) {
-		cancel.setText(text);
-	}
-	
-	public void setValue (String text) {
-		input.setValue(text);
-	}
-	
-	public String getValue () {
-		return input.getValue();
+	public Button getCancelButton () {
+		return cancel;
 	}
 	
 	@UiHandler("input")
@@ -115,6 +114,47 @@ public class PromptDialogView {
 				if (presenter != null) presenter.onCancel();
 			}
 		});
+	}
+
+	@Override
+	public HandlerRegistration addValueChangeHandler (ValueChangeHandler<String> handler) {
+		return input.addValueChangeHandler(handler);
+	}
+
+	@Override
+	public String getValue () {
+		return input.getValue();
+	}
+	
+	@Override
+	public void setValue (String text) {
+		input.setValue(text);
+	}
+	
+	@Override
+	public void setValue (String value, boolean fireEvents) {
+		input.setValue(value, fireEvents);
+	}
+
+	@Override
+	public String getText () {
+		return prompt.getText();
+	}
+
+	@Override
+	public void setText (String text) {
+		prompt.setText(text);
+	}
+
+	@Override
+	public void fireEvent (GwtEvent<?> event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Widget asWidget () {
+		return dialog;
 	}
 
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:cell='urn:import:com.google.gwt.user.cellview.client'
+	xmlns:view='urn:import:ca.ualberta.cs.courseplanner.client.views'
+	xmlns:search='urn:import:ca.ualberta.cs.courseplanner.client.search'>
+
+	<ui:style type="ca.ualberta.cs.courseplanner.client.search.SearchActivity.Style">
+	
+		@external .spacer;
+		@external .rightJoin;
+		@external .leftJoin;
+		
+		.buttonBar {
+			padding: 1em 0em;
+		}
+		
+		.buttonBar div {
+			display: inline;
+			font-size: 75%;
+			text-transform: uppercase;
+		}
+		
+		.buttonBar .spacer {
+			margin-left: 0.5em;
+		}
+		
+		.buttonBar .rightJoin {
+			border-right: solid 1px light-gray;
+		}
+		
+		.buttonBar .leftJoin {
+			border-left: none;
+		}
+		
+		.resultsTable {
+			width: 100%;
+		}
+		
+		.resultsTableCollapsed {
+			width: 15em;
+			float: right;
+			margin-left: 1em;
+		}
+		
+		.closeCourseLink {
+			width: 15em;
+			float: right;
+		}
+		
+		.courseDetails {
+			padding-top: 0.5em;
+		}
+	
+	</ui:style>
+
+	<g:FlowPanel>
+	
+		<g:HTML><h1>Search Results</h1></g:HTML>
+		
+		<g:FlowPanel addStyleNames="{style.buttonBar}">
+			<g:PushButton addStyleNames="rightJoin"><g:upFace>Add To <strong>Plan</strong> &#9660;</g:upFace></g:PushButton>
+			<g:PushButton addStyleNames="leftJoin"><g:upFace><strong>Transcript</strong></g:upFace></g:PushButton>
+			<g:PushButton addStyleNames="spacer">Save Search</g:PushButton>
+			<g:PushButton addStyleNames="spacer">Order By: Relevance &#9660;</g:PushButton>
+			<g:Anchor ui:field="closeCourseLink" addStyleNames="{style.closeCourseLink}" href="javascript:" visible="false">
+				<b>&laquo; Back to Search Results</b>
+			</g:Anchor>
+		</g:FlowPanel>
+		
+		<search:ResultsTable ui:field="resultsTable" addStyleNames="{style.resultsTable}" />
+
+		<g:HTMLPanel ui:field="courseDetails" addStyleNames="{style.courseDetails}" visible="false">
+			<b><g:Label ui:field="courseName" /></b>
+			<i><g:Label ui:field="courseOrg1" /></i>
+			<i><g:Label ui:field="courseOrg2" /></i>
+			<p><g:Label ui:field="courseDescription" /></p>
+		</g:HTMLPanel>
+		
+	</g:FlowPanel>
+
+</ui:UiBinder>

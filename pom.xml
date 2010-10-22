@@ -225,6 +225,20 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.gwt.inject</groupId>
+			<artifactId>gin</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.1.0.Final</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 	<organization>
 		<name>University of Alberta Computing Science</name>

@@ -1,5 +1,7 @@
 package ca.ualberta.cs.courseplanner.model;
 
+import com.google.gwt.view.client.ProvidesKey;
+
 public class PlanInfo implements java.io.Serializable, Comparable<PlanInfo> {
 	
 	private static final long serialVersionUID = 9056869107744111310L;
@@ -57,5 +59,13 @@ public class PlanInfo implements java.io.Serializable, Comparable<PlanInfo> {
 		if (result == 0) result = new Long(id).compareTo(o.id);
 		return result;
 	}
+
+	
+	public static ProvidesKey<PlanInfo> KEY_PROVIDER = new ProvidesKey<PlanInfo> () {
+		@Override
+		public Object getKey (PlanInfo item) {
+			return Long.valueOf(item.getId());
+		}
+	};
 
 }

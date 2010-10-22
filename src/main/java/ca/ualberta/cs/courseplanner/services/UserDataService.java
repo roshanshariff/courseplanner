@@ -1,13 +1,17 @@
 package ca.ualberta.cs.courseplanner.services;
 
+import java.util.Map;
+
+import ca.ualberta.cs.courseplanner.model.CourseInfo;
 import ca.ualberta.cs.courseplanner.model.CoursePlanInfo;
+import ca.ualberta.cs.courseplanner.model.CourseTranscriptInfo;
 import ca.ualberta.cs.courseplanner.model.PlanCourses;
 import ca.ualberta.cs.courseplanner.model.PlanDetails;
 import ca.ualberta.cs.courseplanner.model.PlanInfo;
 import ca.ualberta.cs.courseplanner.model.SavedSearchDetails;
 import ca.ualberta.cs.courseplanner.model.SavedSearchInfo;
 import ca.ualberta.cs.courseplanner.model.SavedSearchResults;
-import ca.ualberta.cs.courseplanner.model.SearchOrdering;
+import ca.ualberta.cs.courseplanner.model.Search;
 
 import com.google.gwt.rpc.client.RpcService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -37,12 +41,21 @@ public interface UserDataService extends RpcService {
 	
 	void removePlanCourse (long planId, long courseId);
 	
-
-	SavedSearchDetails createSavedSearch (String searchName, String query, SearchOrdering ordering);
+	
+	void addTranscriptCourse (long courseId, CourseTranscriptInfo info);
+	
+	void addTranscriptCourses (long[] courseIds);
+	
+	void removeTranscriptCourse (long courseId);
+	
+	Map<CourseInfo, CourseTranscriptInfo> getTranscriptCourses ();
+	
+	
+	SavedSearchDetails createSavedSearch (String searchName, Search search);
 	
 	SavedSearchDetails getSavedSearchDetails (long searchId);
 
-	SavedSearchResults getSavedSearchResults (long searchId, SearchOrdering ordering, int firstResult, int maxResults);
+	SavedSearchResults getSavedSearchResults (long searchId, int firstResult, int maxResults);
 	
 	SavedSearchInfo deleteSavedSearch (long searchId);
 	

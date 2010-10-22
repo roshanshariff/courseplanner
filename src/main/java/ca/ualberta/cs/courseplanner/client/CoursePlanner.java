@@ -1,94 +1,87 @@
 package ca.ualberta.cs.courseplanner.client;
 
-import java.util.Arrays;
-import java.util.Collections;
-
+import ca.ualberta.cs.courseplanner.client.activity.DefaultPlace;
+import ca.ualberta.cs.courseplanner.client.activity.PlaceAwareActivityMapper;
 import ca.ualberta.cs.courseplanner.client.intents.CreatePlanIntent;
 import ca.ualberta.cs.courseplanner.client.intents.SearchCoursesIntent;
 import ca.ualberta.cs.courseplanner.client.plans.PlanIntentHandler;
-import ca.ualberta.cs.courseplanner.client.plans.PlanManager;
-import ca.ualberta.cs.courseplanner.client.plans.PlanManagerImpl;
-import ca.ualberta.cs.courseplanner.client.presenter.PlanListPresenter;
-import ca.ualberta.cs.courseplanner.client.presenter.SearchCoursesPresenter;
-import ca.ualberta.cs.courseplanner.client.views.PlanList;
-import ca.ualberta.cs.courseplanner.model.CourseInfo;
-import ca.ualberta.cs.courseplanner.services.CourseDataService;
-import ca.ualberta.cs.courseplanner.services.CourseDataServiceAsync;
-import ca.ualberta.cs.courseplanner.services.UserDataService;
-import ca.ualberta.cs.courseplanner.services.UserDataServiceAsync;
+import ca.ualberta.cs.courseplanner.client.plans.PlanListProvider;
+import ca.ualberta.cs.courseplanner.client.search.SearchCoursesActivity;
+import ca.ualberta.cs.courseplanner.client.views.cell.PlanHyperlinkRenderer;
+import ca.ualberta.cs.courseplanner.client.views.cell.SafeHtmlRendererCell;
+import ca.ualberta.cs.courseplanner.model.PlanInfo;
 
-import com.google.gwt.cell.client.AbstractCell;
-import com.google.gwt.cell.client.CheckboxCell;
-import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.activity.shared.ActivityManager;
+import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.activity.shared.CachingActivityMapper;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.IdentityColumn;
+import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.view.client.NoSelectionModel;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 
-public class CoursePlanner implements EntryPoint {
-	
+@Singleton
+public class CoursePlanner extends Composite {
+
 	interface Binder extends UiBinder<FlowPanel, CoursePlanner> { }
-	
-	private static final Binder binder = GWT.create(Binder.class);
-	
-	@UiField PlanList planList;
-	
+
+	private static final Binder BINDER = GWT.create(Binder.class);
+
+	@UiField(provided=true) CellList<PlanInfo> planList =
+		new CellList<PlanInfo>(
+				new SafeHtmlRendererCell<PlanInfo>(new PlanHyperlinkRenderer()),
+				PlanInfo.KEY_PROVIDER
+		);
 	@UiField FlowPanel searchList;
+	@UiField AcceptsOneWidget searchCoursesDisplay;
+	@UiField AcceptsOneWidget mainDisplay;
+
+	private final EventBus eventBus;
+
+	@Inject
+	public CoursePlanner (
+			EventBus eventBus,
+			ActivityManager activityManager,
+			PlaceHistoryHandler placeHistoryHandler,
+			PlaceController placeController,
+			PlanIntentHandler planIntentHandler,
+			PlanListProvider planListProvider,
+			SearchCoursesActivity searchCoursesActivity
+	) {
+
+		initWidget(BINDER.createAndBindUi(this));
+
+		this.eventBus = eventBus;
 	
-	@UiField SearchCoursesPresenter.View searchCoursesView;
-	
-	@UiField SimplePanel content;
-	
-	private final EventBus eventBus = new SimpleEventBus();
-	
-	private final CourseDataServiceAsync courseDataService =
-		(CourseDataServiceAsync) GWT.create(CourseDataService.class);
-	
-	private final UserDataServiceAsync userDataService =
-		(UserDataServiceAsync) GWT.create(UserDataService.class);
-	
-	private final PlanManager planManager = new PlanManagerImpl(userDataService, eventBus);
-	
-	private final PlanListPresenter planListPresenter = new PlanListPresenter(planManager, eventBus);
-	
-	private final PlanIntentHandler planIntentHandler = new PlanIntentHandler(planManager, eventBus);
-	
-	private final SearchCoursesPresenter searchCoursesPresenter = new SearchCoursesPresenter (eventBus);
-	
-	public void onModuleLoad () {
-		
-		Document.get().getBody().getStyle().setOverflow(Style.Overflow.HIDDEN);
-		RootLayoutPanel.get().add(new ScrollPanel(binder.createAndBindUi(this)));
-		
-		planListPresenter.start();
-		planListPresenter.addDataDisplay(planList);
-		
-		planIntentHandler.start();
-		
-		searchCoursesPresenter.setView(searchCoursesView);
-		searchCoursesPresenter.start();
-		
+		activityManager.setDisplay(mainDisplay);
+		placeHistoryHandler.register(placeController, eventBus, new DefaultPlace());
+		placeHistoryHandler.handleCurrentHistory();
+
+		planIntentHandler.addHandler(eventBus);
+
+		planList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.DISABLED);
+		planListProvider.addDataDisplay(planList);
+
+		searchCoursesActivity.start(searchCoursesDisplay, eventBus);
 	}
-	
+
 	@UiHandler("createPlanLink")
 	void handleCreatePlan (ClickEvent event) {
 		eventBus.fireEvent(new CreatePlanIntent());
 	}
-	
+
 	@UiHandler("searchCoursesLink")
 	void handleSearchCourses (ClickEvent event) {
 		eventBus.fireEvent(new SearchCoursesIntent());

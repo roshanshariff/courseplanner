@@ -12,10 +12,8 @@ public class SavedSearchDetails extends SavedSearchInfo {
 	
 	private boolean publicReadable;
 	
-	private String query;
+	private Search search;
 	
-	private SearchOrdering ordering;
-
 	
 	public String getUserId () { return userId; }
 
@@ -29,12 +27,8 @@ public class SavedSearchDetails extends SavedSearchInfo {
 
 	public void setPublic (boolean publicReadable) { this.publicReadable = publicReadable; }
 
-	public String getQuery () { return query; }
+	public Search getSearch () { return search; }
 	
-	public void setQuery (String query) { this.query = query; }
-	
-	public SearchOrdering getOrdering () { return ordering; }
-
-	public void setOrdering (SearchOrdering ordering) { this.ordering = ordering; }
+	public void setSearch (Search search) { this.search = search; }
 	
 }

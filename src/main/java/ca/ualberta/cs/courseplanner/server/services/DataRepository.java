@@ -3,6 +3,7 @@ package ca.ualberta.cs.courseplanner.server.services;
 import java.util.List;
 
 import ca.ualberta.cs.courseplanner.entities.*;
+import ca.ualberta.cs.courseplanner.model.Search;
 
 public interface DataRepository {
 
@@ -22,7 +23,7 @@ public interface DataRepository {
 	public void deletePlan (Plan plan);
 	
 	
-	public SavedSearch createSavedSearch (User user, String name, String query);
+	public SavedSearch createSavedSearch (User user, String name, Search search);
 	
 	public SavedSearch getSavedSearch (Long id);
 	

@@ -1,6 +1,7 @@
 package ca.ualberta.cs.courseplanner.server.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -167,15 +168,52 @@ public class UserDataServiceImpl implements UserDataService {
 		plan.getCourses().remove(course);
 	}
 
+	@Override
+	@Transactional
+	public void addTranscriptCourse (long courseId, CourseTranscriptInfo info) {
+		User user = currentUser.get();
+		user.getCourseHistory().put(dataRepository.getCourse(courseId), info);
+	}
 
 	@Override
 	@Transactional
-	public SavedSearchDetails createSavedSearch (String searchName,
-			String query, SearchOrdering ordering) {
+	public void addTranscriptCourses (long[] courseIds) {
+		User user = currentUser.get();
+		Map<Course, CourseTranscriptInfo> transcriptCourses = user.getCourseHistory();
+		for (long courseId : courseIds) {
+			transcriptCourses.put(dataRepository.getCourse(courseId), new CourseTranscriptInfo());
+		}
+	}
+
+	@Override
+	@Transactional
+	public void removeTranscriptCourse (long courseId) {
+		User user = currentUser.get();
+		Course course = dataRepository.getCourse(courseId);
+		user.getCourseHistory().remove(course);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Map<CourseInfo, CourseTranscriptInfo> getTranscriptCourses () {
+		Map<Course, CourseTranscriptInfo> source = currentUser.get().getCourseHistory();
+		Map<CourseInfo, CourseTranscriptInfo> result = new HashMap<CourseInfo, CourseTranscriptInfo>();
+		for (Map.Entry<Course, CourseTranscriptInfo> entry : source.entrySet()) {
+			CourseInfo courseInfo = mapper.map(entry.getKey(), CourseInfo.class);
+			CourseTranscriptInfo courseTranscriptInfo = mapper.map(entry.getValue(), CourseTranscriptInfo.class);
+			result.put(courseInfo, courseTranscriptInfo);
+		}
+		return result;
+	}
+
+
+
+	@Override
+	@Transactional
+	public SavedSearchDetails createSavedSearch (String searchName, Search search) {
 		// TODO Ensure mapping data is working
-		SavedSearch search = dataRepository.createSavedSearch(currentUser.get(), searchName, query);
-		search.setOrdering(ordering);
-		return mapper.map(search, SavedSearchDetails.class);
+		SavedSearch savedSearch = dataRepository.createSavedSearch(currentUser.get(), searchName, search);
+		return mapper.map(savedSearch, SavedSearchDetails.class);
 	}
 
 
@@ -190,13 +228,11 @@ public class UserDataServiceImpl implements UserDataService {
 
 	@Override
 	@Transactional(readOnly=true)
-	public SavedSearchResults getSavedSearchResults (long searchId, SearchOrdering ordering, int firstResult, int maxResults) {
-		SavedSearch search = dataRepository.getSavedSearch(searchId);
-		prepareRead(search);
-		SavedSearchResults results = mapper.map(search, SavedSearchResults.class);
-		if (ordering == null) ordering = results.getOrdering();
-		if (ordering == null) ordering = SearchOrdering.DEFAULT;
-		results.setSearchResults(searchEngine.searchCourses(results.getQuery(), ordering, firstResult, maxResults));
+	public SavedSearchResults getSavedSearchResults (long searchId, int firstResult, int maxResults) {
+		SavedSearch savedsearch = dataRepository.getSavedSearch(searchId);
+		prepareRead(savedsearch);
+		SavedSearchResults results = mapper.map(savedsearch, SavedSearchResults.class);
+		results.setResults(searchEngine.searchCourses(savedsearch.getSearch(), firstResult, maxResults));
 		return results;
 	}
 

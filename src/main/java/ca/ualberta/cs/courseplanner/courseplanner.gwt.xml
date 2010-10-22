@@ -4,11 +4,11 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.rpc.RPC" />
 	<inherits name="com.google.gwt.user.theme.standard.Standard" />
-  	<inherits name='com.google.gwt.app.App' />
- 	<inherits name='com.google.gwt.user.cellview.CellView'/>
+ 	<inherits name="com.google.gwt.activity.Activity"/>
+ 	<inherits name="com.google.gwt.inject.Inject"/>
    	<source path="client" />
 	<source path="services" />
 	<source path="model" />
 	<source path="util" />
-	<entry-point class="ca.ualberta.cs.courseplanner.client.CoursePlanner" />
+	<entry-point class="ca.ualberta.cs.courseplanner.client.Main" />
 </module>

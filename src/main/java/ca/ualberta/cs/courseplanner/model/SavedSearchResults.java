@@ -11,6 +11,6 @@ public class SavedSearchResults extends SavedSearchDetails {
 	
 	public SearchResults getResults () { return results; }
 	
-	public void setSearchResults (SearchResults results) { this.results = results; }
+	public void setResults (SearchResults results) { this.results = results; }
 
 }

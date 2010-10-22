@@ -39,10 +39,10 @@ public class CourseDataServiceImpl implements CourseDataService {
 		return mapper.map(dataRepository.getCourse(id), CourseDetails.class);
 	}
 
+
 	@Override
-	public SearchResults searchCourses (String queryString, SearchOrdering ordering, int firstResult, int maxResults) {
-		if (ordering == null) ordering = SearchOrdering.DEFAULT;
-		return searchEngine.searchCourses(queryString, ordering, firstResult, maxResults);
+	public SearchResults searchCourses (Search search, int offset, int results) {
+		return searchEngine.searchCourses(search, offset, results);
 	}
 
 }

@@ -12,7 +12,6 @@ import org.apache.lucene.queryParser.core.QueryNodeException;
 import org.apache.lucene.queryParser.standard.StandardQueryParser;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
-import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextQuery;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.transform.ResultTransformer;
@@ -21,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.entities.Course;
 import ca.ualberta.cs.courseplanner.model.CourseInfo;
+import ca.ualberta.cs.courseplanner.model.Search;
 import ca.ualberta.cs.courseplanner.model.SearchResults;
-import ca.ualberta.cs.courseplanner.model.SearchOrdering;
 import ca.ualberta.cs.courseplanner.server.search.CourseInfoResultTransformer;
 import ca.ualberta.cs.courseplanner.server.services.SearchEngine;
 
@@ -31,7 +30,9 @@ import ca.ualberta.cs.courseplanner.server.services.SearchEngine;
 @Singleton
 public class SearchEngineImpl implements SearchEngine {
 	
-	private static final EnumMap<SearchOrdering, Sort> SORT;
+	private static final int MAX_RESULTS = 100;
+	
+	private static final EnumMap<Search.Ordering, Sort> SORT;
 	
 	static {
 		SortField score = SortField.FIELD_SCORE;		
@@ -42,11 +43,11 @@ public class SearchEngineImpl implements SearchEngine {
 		SortField level = new SortField("level", SortField.INT);
 		SortField levelRev = new SortField("level", SortField.INT, true);
 		
-		SORT = new EnumMap<SearchOrdering, Sort>(SearchOrdering.class);
-		SORT.put(SearchOrdering.DEFAULT,  new Sort(new SortField[] {score, subject, number, id}));
-		SORT.put(SearchOrdering.SUBJECT,  new Sort(new SortField[] {subject, number, id}));
-		SORT.put(SearchOrdering.LEVEL,    new Sort(new SortField[] {level, subject, number, id}));
-		SORT.put(SearchOrdering.LEVELREV, new Sort(new SortField[] {levelRev, subject, numberRev, id}));
+		SORT = new EnumMap<Search.Ordering, Sort>(Search.Ordering.class);
+		SORT.put(Search.Ordering.DEFAULT,  new Sort(new SortField[] {score, subject, number, id}));
+		SORT.put(Search.Ordering.SUBJECT,  new Sort(new SortField[] {subject, number, id}));
+		SORT.put(Search.Ordering.LEVEL,    new Sort(new SortField[] {level, subject, number, id}));
+		SORT.put(Search.Ordering.LEVELREV, new Sort(new SortField[] {levelRev, subject, numberRev, id}));
 	}
 	
 	
@@ -63,22 +64,24 @@ public class SearchEngineImpl implements SearchEngine {
 
 	@Override
 	@Transactional(readOnly=true)
-	public SearchResults searchCourses (String queryString, SearchOrdering ordering, int firstResult, int maxResults) {
+	public SearchResults searchCourses (Search search, int firstResult, int maxResults) {
 		try {
 			
 			FullTextSession session = fullTextSession.get();
 
 			StandardQueryParser queryParser = new StandardQueryParser();
 			queryParser.setAnalyzer(session.getSearchFactory().getAnalyzer(Course.class));
+			
+			if (maxResults > MAX_RESULTS) maxResults = MAX_RESULTS;
 
 			FullTextQuery query =
-				session.createFullTextQuery(queryParser.parse(queryString, "all"), Course.class)
+				session.createFullTextQuery(queryParser.parse(search.getQuery(), "all"), Course.class)
 				.setProjection("id", "subject.id", "number", "name")
 				.setResultTransformer(courseInfoResultTransformer)
 				.setFirstResult(firstResult)
 				.setMaxResults(maxResults);
 			
-			if (ordering != null) query.setSort(SORT.get(ordering));
+			if (search.getOrdering() != null) query.setSort(SORT.get(search.getOrdering()));
 			
 			@SuppressWarnings("unchecked")
 			List<CourseInfo> courses = query.list();

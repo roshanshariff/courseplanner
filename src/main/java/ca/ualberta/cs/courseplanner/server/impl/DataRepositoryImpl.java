@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.ualberta.cs.courseplanner.entities.*;
+import ca.ualberta.cs.courseplanner.model.Search;
 import ca.ualberta.cs.courseplanner.server.services.DataRepository;
 
 @Repository
@@ -91,14 +92,14 @@ public class DataRepositoryImpl implements DataRepository {
 
 	@Override
 	@Transactional
-	public SavedSearch createSavedSearch (User user, String name, String query) {
-		SavedSearch search = new SavedSearch();
-		search.setUser(user);
-		search.setName(name);
-		search.setQuery(query);
-		session.get().save(search);
+	public SavedSearch createSavedSearch (User user, String name, Search search) {
+		SavedSearch savedSearch = new SavedSearch();
+		savedSearch.setUser(user);
+		savedSearch.setName(name);
+		savedSearch.setSearch(search);
+		session.get().save(savedSearch);
 		session.get().flush();
-		return search;
+		return savedSearch;
 	}
 
 	@Override

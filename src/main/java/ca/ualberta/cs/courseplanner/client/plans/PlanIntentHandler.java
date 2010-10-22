@@ -1,36 +1,31 @@
 package ca.ualberta.cs.courseplanner.client.plans;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 import ca.ualberta.cs.courseplanner.client.intents.CreatePlanIntent;
 import ca.ualberta.cs.courseplanner.client.presenter.PlanCreatePresenter;
-import ca.ualberta.cs.courseplanner.client.views.PromptDialogView;
 
+@Singleton
 public class PlanIntentHandler implements CreatePlanIntent.Handler {
 	
-	private final PlanManager planManager;
+	private final Provider<PlanCreatePresenter> planCreateActivity;
 	
-	private final EventBus eventBus;
-	
-	public PlanIntentHandler (PlanManager planManager, EventBus eventBus) {
-		this.planManager = planManager;
-		this.eventBus = eventBus;
+	@Inject
+	public PlanIntentHandler (Provider<PlanCreatePresenter> planCreateActivity) {
+		this.planCreateActivity = planCreateActivity;
 	}
 	
-	public void start () {
-		eventBus.addHandler(CreatePlanIntent.TYPE, this);
+	public HandlerRegistration addHandler (EventBus eventBus) {
+		return eventBus.addHandler(CreatePlanIntent.TYPE, this);
 	}
 	
-	public void stop () {
-		eventBus.addHandler(CreatePlanIntent.TYPE, this);
-	}
-
 	@Override
 	public void createPlan (CreatePlanIntent intent) {
-		PromptDialogView view = new PromptDialogView();
-		PlanCreatePresenter presenter = new PlanCreatePresenter(view, planManager, eventBus);
-		presenter.setIntent(intent);
-		presenter.start();
+		planCreateActivity.get().setIntent(intent);
 	}
 
 }
